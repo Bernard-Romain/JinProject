@@ -40,6 +40,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(pugixml)
 
 add_subdirectory(mainLauncher)
+add_subdirectory(srcOriginal)
 add_subdirectory(src)
 
 #

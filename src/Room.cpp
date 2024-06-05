@@ -1,5 +1,6 @@
 #include <cassert>
 #include <iostream>
+#include <sstream>
 
 #include "Room.h"
 
@@ -23,5 +24,11 @@ void Room::update() {
 
 std::string Room::dump(std::string const& indent) const{
 
-    return "NOT YET IMPLEMENTED";
+    ostringstream oss;
+    oss << indent << "Room [" << endl;
+    for (auto const& c : entities) {
+        oss << c->dump(indent + "| ");
+    }
+    oss << indent << "]" << endl;
+    return oss.str();
 }

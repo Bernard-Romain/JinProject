@@ -14,6 +14,7 @@ public:
 	 int isHit();
 	 void collide();
 	 void update();
+	 virtual std::string dump(std::string const& indent) const;
 private:
 
 };

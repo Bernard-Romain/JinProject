@@ -16,3 +16,4 @@ void Entity::collide()
 void Entity::update()
 {
 }
+

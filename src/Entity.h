@@ -7,9 +7,11 @@ class Entity
 {
 protected:
 	sf::Vector2f position;
-	sf::RectangleShape shape;
-	sf::Texture texture;
+	sf::Image sprite;
+
 public:
+	explicit(false) Entity(pugi::xml_node node);
+
 	 void render();
 	 int isHit();
 	 void collide();

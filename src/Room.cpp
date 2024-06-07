@@ -3,6 +3,7 @@
 #include <sstream>
 
 #include "Room.h"
+#include "Wall.h"
 
 using namespace std;
 
@@ -10,7 +11,10 @@ Room::Room(pugi::xml_node node)
 {
     for (auto child : node.children())
     {
-        cout << "top\n";
+        assert((child.name() == "Wall"sv));
+        if (child.name() == "Wall"sv) {
+            entities.push_back(make_unique<Wall>(child));
+        }
     }
 }
 

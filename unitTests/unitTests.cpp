@@ -19,11 +19,12 @@ TEST(TestCreationRoomAPartirDuXML, RoomVide) {
     EXPECT_EQ(room.dump(""), room_dump_ref);
 }
 
-TEST(TestCreationRoomAPartirDuXML, RoomAvecMurs) {
+TEST(TestCreationRoomAPartirDuXML, RoomSansPorte) {
     std::string s = R"(<?xml version = "1.0"?>
-                       <Room>
+                       <Room >
                            <Wall x="0" y="0" sprite="Wall"/>
-                           <Wall x="10" y="10" sprite="Wall"/>
+                           <Monster x="10" y="10" sprite="Monster" speed="20" hp="3"/>
+                           <Player x="40" y="40" sprite="Player" speed="20" hp="3"/>
                        </Room>)";
     pugi::xml_document doc;
     pugi::xml_parse_result result = doc.load_string(s.c_str());
@@ -33,7 +34,8 @@ TEST(TestCreationRoomAPartirDuXML, RoomAvecMurs) {
     std::string room_dump_ref =
         R"(Room [
 | Wall x: 0, y: 0, 
-| Wall x: 10, y: 10, 
+| Monster x: 10, y: 10, speed: 20, hp: 3, 
+| Player x: 40, y: 40, speed: 20, hp: 3, 
 ]
 )";
     EXPECT_EQ(room.dump(""), room_dump_ref);

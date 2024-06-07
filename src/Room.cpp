@@ -4,6 +4,8 @@
 
 #include "Room.h"
 #include "Wall.h"
+#include "Player.h"
+#include "Monster.h"
 
 using namespace std;
 
@@ -11,9 +13,15 @@ Room::Room(pugi::xml_node node)
 {
     for (auto child : node.children())
     {
-        assert((child.name() == "Wall"sv));
+        assert((child.name() == "Wall"sv) || (child.name() == "Monster"sv) || (child.name() == "Player"sv));
         if (child.name() == "Wall"sv) {
             entities.push_back(make_unique<Wall>(child));
+        }
+        if (child.name() == "Monster"sv) {
+            entities.push_back(make_unique<Monster>(child));
+        }
+        if (child.name() == "Player"sv) {
+            entities.push_back(make_unique<Player>(child));
         }
     }
 }

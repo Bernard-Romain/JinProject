@@ -13,7 +13,6 @@ Entity::Entity(pugi::xml_node node)
 	sprite = sf::Image();
 	string spriteLabel = node.attribute("sprite").as_string();
 	if (spriteLabel == "Wall"sv) sprite.loadFromFile("sprites/Wall.png");
-	else cout << "a\n\n\n";
 }
 
 void Entity::render()

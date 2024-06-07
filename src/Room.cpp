@@ -10,6 +10,7 @@
 using namespace std;
 
 Room::Room(pugi::xml_node node)
+    : label { node.attribute("label").as_string() }
 {
     for (auto child : node.children())
     {
@@ -37,7 +38,7 @@ void Room::update() {
 std::string Room::dump(std::string const& indent) const{
 
     ostringstream oss;
-    oss << indent << "Room [" << endl;
+    oss << indent << "Room " << label << " [" << endl;
     for (auto const& c : entities) {
         oss << c->dump(indent + "| ");
     }

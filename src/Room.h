@@ -18,8 +18,10 @@ public:
     void update();
 
     std::string dump(std::string const& indent) const;
+    std::string getLabel() { return label; }
 
 private:
+    std::string label;
     Room_State state;
     std::vector<std::unique_ptr<Entity>> entities;
 };

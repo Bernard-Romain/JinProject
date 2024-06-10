@@ -14,3 +14,7 @@ std::string Monster::dump(std::string const& indent) const {
         "Monster " << LivingEntity::dump(indent) << endl;
     return oss.str();
 }
+
+void Monster::render(sf::RenderWindow* mWindow) const {
+
+}

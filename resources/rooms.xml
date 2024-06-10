@@ -3,5 +3,5 @@
 	<Wall x="0" y="0" sprite="Wall"/>
 </Room>
 <Room label="DeuxiemeRoom" >
-	<Wall x="10" y="10" sprite="Wall"/>
+	<Wall x="100" y="100" sprite="Wall"/>
 </Room>

@@ -14,7 +14,7 @@ class Room
 public:
     Room(pugi::xml_node node);
 
-    void render();
+    void render(sf::RenderWindow* mWindow) const;
     void update();
 
     std::string dump(std::string const& indent) const;

@@ -14,3 +14,7 @@ std::string Wall::dump(std::string const& indent) const {
         "Wall " << Entity::dump(indent) << endl;
     return oss.str();
 }
+
+void Wall::render(sf::RenderWindow* mWindow) const {
+    mWindow->draw(sprite);
+}

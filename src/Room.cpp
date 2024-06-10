@@ -27,8 +27,10 @@ Room::Room(pugi::xml_node node)
     }
 }
 
-void Room::render() {
-
+void Room::render(sf::RenderWindow* mWindow) const {
+    for (auto const& entity : entities) {
+        entity.get()->render(mWindow);
+    }
 }
 
 void Room::update() {

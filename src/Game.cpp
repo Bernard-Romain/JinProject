@@ -34,8 +34,9 @@ void Game::load()
 		}
 	}
 	currentRoom = rooms.begin();
+	currentRoom++;
 
-	cout << this->dump("");
+	cout << currentRoom->get()->dump("");
 }
 
 string Game::dump(std::string const& indent) const {
@@ -49,7 +50,7 @@ string Game::dump(std::string const& indent) const {
 void Game::render()
 {
 	mWindow.clear();
-	currentRoom->get()->render();
+	currentRoom->get()->render(&mWindow);
 	mWindow.display();
 }
 

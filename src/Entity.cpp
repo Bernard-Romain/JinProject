@@ -14,10 +14,6 @@ Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x"
 	sprite.setTexture(texture);
 }
 
-void Entity::render(sf::RenderWindow mWindow)
-{
-}
-
 int Entity::isHit()
 {
 	return 0;

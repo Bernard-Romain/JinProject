@@ -58,3 +58,7 @@ void Player::manageInput(sf::Keyboard::Key input, bool active)
         }
     }
 }
+
+void Player::render(sf::RenderWindow* mWindow) const {
+
+}

@@ -19,7 +19,7 @@ void Game::render()
 
 void Game::update(sf::Time elapsedTime)
 {
-	printf("Updating");
+	//printf("Updating");
 }
 
 void Game::save()
@@ -29,7 +29,7 @@ void Game::save()
 
 void Game::processEvents()
 {
-	sf::Event event{ sf::Event::Count }; // Initialization to an impossible value (in order to suppress Clang-Tidy warning)
+	sf::Event event{ sf::Event::Count }; 
 	while (mWindow.pollEvent(event))
 	{
 		switch (event.type)
@@ -40,7 +40,6 @@ void Game::processEvents()
 			break;
 
 		default:
-			// We simply ignore all other events
 			break;
 		}
 	}

@@ -1,0 +1,7 @@
+<?xml version = "1.0"?>
+<Room label="DoorlessRoom" >
+	<Wall x="0" y="0" sprite="Wall"/>
+</Room>
+<Room label="DoorlessRoom" >
+	<Wall x="0" y="0" sprite="Wall"/>
+</Room>

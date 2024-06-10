@@ -5,6 +5,7 @@ class Game {
 public:
 	Game();
 	void	run();
+	std::string dump(std::string const& indent) const;
 
 private:
 	void	processEvents();

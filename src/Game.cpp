@@ -33,6 +33,7 @@ void Game::load()
 
 		}
 	}
+	currentRoom = rooms.begin();
 
 	cout << this->dump("");
 }
@@ -48,15 +49,7 @@ string Game::dump(std::string const& indent) const {
 void Game::render()
 {
 	mWindow.clear();
-
-	//printf("rendering");
-
-	auto texture = sf::Texture();
-	texture.loadFromFile("resources/sprites/Wall.png");
-	auto sprite = sf::Sprite();
-	sprite.setTexture(texture);
-
-	mWindow.draw(sprite);
+	currentRoom->get()->render();
 	mWindow.display();
 }
 

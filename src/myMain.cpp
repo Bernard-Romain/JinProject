@@ -3,12 +3,14 @@
 #include <thread>
 #include "myMain.h"
 #include <algorithm>
+#include "Game.h"
 
 
 using namespace std;
 
 int myMain()
 {
-	printf("ok");
+	Game game;
+	game.run();
 	return 0;
 }

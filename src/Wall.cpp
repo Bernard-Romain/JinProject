@@ -15,6 +15,3 @@ std::string Wall::dump(std::string const& indent) const {
     return oss.str();
 }
 
-void Wall::render(sf::RenderWindow* mWindow) const {
-    mWindow->draw(sprite);
-}

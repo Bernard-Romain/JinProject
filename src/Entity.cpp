@@ -4,14 +4,14 @@
 
 using namespace std;
 
-sf::Vector2f position;
-sf::Image sprite;
-
 Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
 {
-	sprite = sf::Image();
+	texture = sf::Texture();
+
 	string spriteLabel = node.attribute("sprite").as_string();
-	if (spriteLabel == "Wall"sv) sprite.loadFromFile("sprites/Wall.png");
+	if (spriteLabel == "Wall"sv) texture.loadFromFile("resources/sprites/Wall.png");
+
+	sprite.setTexture(texture);
 }
 
 void Entity::render(sf::RenderWindow mWindow)

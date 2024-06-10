@@ -1,4 +1,9 @@
 #include "Game.h"
+#include <iostream>
+#include <sstream>
+#include <SFML/Graphics.hpp>
+
+using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
 
@@ -8,12 +13,43 @@ Game::Game()
 
 void Game::load()
 {
-	printf("Loading");
+	printf("Loading\n");
+
+	pugi::xml_document doc;
+	if (auto result = doc.load_file("resources/rooms.xml"); !result)
+	{
+		std::cerr << "Could not open file visage.xml because " << result.description() << std::endl;
+		exit(1);
+	}
+
+	for (auto child : doc.children())
+	{
+		if (child.name() == "Room"sv) {
+			auto room = std::make_unique<Room>(child);
+			rooms.push_back(std::move(room));
+		}
+		if (child.name() == "Player"sv) {
+			//TODO A IMPLEMENTER
+
+		}
+	}
+	currentRoom = rooms.begin();
+
+	cout << this->dump("");
+}
+
+string Game::dump(std::string const& indent) const {
+	ostringstream oss;
+	for (auto const& room : rooms) {
+		oss << room->dump("");
+	}
+	return oss.str();
 }
 
 void Game::render()
 {
 	mWindow.clear();
+	currentRoom->get()->render();
 	mWindow.display();
 }
 

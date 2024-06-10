@@ -7,7 +7,8 @@ class Entity
 {
 protected:
 	sf::Vector2f position;
-	sf::Image sprite;
+	sf::Texture texture;
+	sf::Sprite sprite;
 
 public:
 	explicit(false) Entity(pugi::xml_node node);

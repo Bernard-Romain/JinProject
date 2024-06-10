@@ -4,6 +4,7 @@
 #include "myMain.h"
 #include <algorithm>
 #include "Game.h"
+#include <SFML/Graphics.hpp>
 
 
 using namespace std;

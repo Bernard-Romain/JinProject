@@ -35,11 +35,11 @@ void Game::processEvents()
 		switch (event.type)
 		{
 		case sf::Event::KeyPressed:
-			player.manageInput(event.key.code, true);
+			player->manageInput(event.key.code, true);
 			break;
 
 		case sf::Event::KeyReleased:
-			player.manageInput(event.key.code, false);
+			player->manageInput(event.key.code, false);
 			break;
 
 		case sf::Event::Closed:

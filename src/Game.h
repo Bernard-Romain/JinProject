@@ -18,6 +18,4 @@ private:
 	std::vector<std::unique_ptr<Room>> rooms;
 	static const sf::Time	TimePerFrame;
 
-	Player player;
-
 };

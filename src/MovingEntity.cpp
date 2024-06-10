@@ -5,7 +5,7 @@ using namespace std;
 
 MovingEntity::MovingEntity(pugi::xml_node node)
 	: Entity(node)
-	, speed{ node.attribute("speed").as_int() }
+	, speed{ node.attribute("speed").as_float() }
 {}
 
 void MovingEntity::move()

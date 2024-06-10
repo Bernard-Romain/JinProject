@@ -12,7 +12,7 @@ protected:
 public:
 	explicit(false) Entity(pugi::xml_node node);
 
-	 void render();
+	 void render(sf::RenderWindow mWindow);
 	 int isHit();
 	 void collide();
 	 void update();

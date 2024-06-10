@@ -7,15 +7,14 @@ using namespace std;
 sf::Vector2f position;
 sf::Image sprite;
 
-Entity::Entity(pugi::xml_node node) 
-	: position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
+Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
 {
 	sprite = sf::Image();
 	string spriteLabel = node.attribute("sprite").as_string();
 	if (spriteLabel == "Wall"sv) sprite.loadFromFile("sprites/Wall.png");
 }
 
-void Entity::render()
+void Entity::render(sf::RenderWindow mWindow)
 {
 }
 

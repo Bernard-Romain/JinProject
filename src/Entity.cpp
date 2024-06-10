@@ -4,8 +4,7 @@
 
 using namespace std;
 
-Entity::Entity(pugi::xml_node node) 
-	: position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
+Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
 {
 	texture = sf::Texture();
 
@@ -15,7 +14,7 @@ Entity::Entity(pugi::xml_node node)
 	sprite.setTexture(texture);
 }
 
-void Entity::render()
+void Entity::render(sf::RenderWindow mWindow)
 {
 }
 

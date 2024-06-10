@@ -7,6 +7,7 @@ public:
 
 	void move();
 	virtual std::string dump(std::string const& indent) const;
-private:
-	int speed;
+protected:
+	float speed;
+	sf::Vector2f direction;
 };

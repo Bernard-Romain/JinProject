@@ -10,6 +10,7 @@ MovingEntity::MovingEntity(pugi::xml_node node)
 
 void MovingEntity::move()
 {
+	position += direction * speed;
 }
 
 std::string MovingEntity::dump(std::string const& indent) const {

@@ -14,3 +14,47 @@ std::string Player::dump(std::string const& indent) const {
         "Player " << LivingEntity::dump(indent) << endl;
     return oss.str();
 }
+
+void Player::manageInput(sf::Keyboard::Key input, bool active)
+{
+    if (active)
+    {
+        switch (input)
+        {
+        case sf::Keyboard::Key::Z:
+            direction += sf::Vector2f(0, -1);
+            break;
+        case sf::Keyboard::Key::Q:
+            direction += sf::Vector2f(-1, 0);
+            break;
+        case sf::Keyboard::Key::S:
+            direction += sf::Vector2f(0, 1);
+            break;
+        case sf::Keyboard::Key::D:
+            direction += sf::Vector2f(1, 0);
+            break;
+        default :
+            break;
+        }
+    }
+    else
+    {
+        switch (input)
+        {
+        case sf::Keyboard::Key::Z:
+            direction += sf::Vector2f(0, 1);
+            break;
+        case sf::Keyboard::Key::Q:
+            direction += sf::Vector2f(1, 0);
+            break;
+        case sf::Keyboard::Key::S:
+            direction += sf::Vector2f(0, -1);
+            break;
+        case sf::Keyboard::Key::D:
+            direction += sf::Vector2f(-1, 0);
+            break;
+        default:
+            break;
+        }
+    }
+}

@@ -12,7 +12,10 @@ Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x"
 	if (spriteLabel == "Wall"sv) texture.loadFromFile("resources/sprites/Wall.png");
 	if (spriteLabel == "Player"sv) texture.loadFromFile("resources/sprites/Isaac.png");
 
+	texture.setRepeated(true);
+
 	sprite.setTexture(texture);
+	sprite.setTextureRect({0,0,1960,60});
 	sprite.setPosition(position);
 }
 

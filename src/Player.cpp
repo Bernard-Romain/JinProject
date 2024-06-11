@@ -8,7 +8,9 @@ Player::Player(pugi::xml_node node)
 {
     sprite.setScale(sf::Vector2f(0.35, 0.35));
 
-    inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 30, sf::Vector2f (0,0), 1));
+    for (int i = 0; i < 10; i ++ ) {
+        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 8, sf::Vector2f(0, 0), 1));
+    }
 }
 
 std::string Player::dump(std::string const& indent) const {

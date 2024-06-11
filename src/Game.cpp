@@ -18,7 +18,7 @@ void Game::load()
 	pugi::xml_document doc;
 	if (auto result = doc.load_file("resources/rooms.xml"); !result)
 	{
-		std::cerr << "Could not open file visage.xml because " << result.description() << std::endl;
+		std::cerr << "Could not open file rooms.xml because " << result.description() << std::endl;
 		exit(1);
 	}
 
@@ -29,13 +29,13 @@ void Game::load()
 			rooms.push_back(std::move(room));
 		}
 		if (child.name() == "Player"sv) {
-			//TODO A IMPLEMENTER
-
+			player = std::make_unique<Player>(child);
 		}
 	}
 	currentRoom = rooms.begin();
 
 	cout << currentRoom->get()->dump("");
+	cout << player->dump("");
 }
 
 string Game::dump(std::string const& indent) const {
@@ -50,12 +50,14 @@ void Game::render()
 {
 	mWindow.clear();
 	currentRoom->get()->render(&mWindow);
+	player->render(&mWindow);
 	mWindow.display();
 }
 
-void Game::update(sf::Time elapsedTime)
+void Game::update()
 {
-	//printf("Updating");
+	currentRoom->get()->update();
+	player->update();
 }
 
 void Game::save()
@@ -103,7 +105,7 @@ void Game::run()
 			timeSinceLastUpdate -= TimePerFrame;
 
 			processEvents();
-			update(TimePerFrame);
+			update();
 		}
 		render();
 	}

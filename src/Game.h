@@ -11,7 +11,7 @@ private:
 	void	processEvents();
 	void	load();
 	void	render();
-	void	update(sf::Time elapsedTime);
+	void	update();
 	void	save();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};

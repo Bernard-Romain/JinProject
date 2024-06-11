@@ -16,7 +16,7 @@ public:
 	 void render(sf::RenderWindow* mWindow) const;
 	 int isHit();
 	 void collide();
-	 void update();
+	 virtual void update();
 	 virtual std::string dump(std::string const& indent) const;
 private:
 

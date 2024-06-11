@@ -7,5 +7,4 @@ public:
 	std::string dump(std::string const& indent) const;
 	void manageInput(sf::Keyboard::Key input, bool active);
 private:
-	void render(sf::RenderWindow* mWindow) const;
 };

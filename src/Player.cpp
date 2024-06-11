@@ -19,48 +19,22 @@ std::string Player::dump(std::string const& indent) const {
 
 void Player::manageInput(sf::Keyboard::Key input, bool active)
 {
-    if (active)
+    switch (input)
     {
-        switch (input)
-        {
-        case sf::Keyboard::Key::Z:
-            direction += sf::Vector2f(0, -1);
-            break;
-        case sf::Keyboard::Key::Q:
-            direction += sf::Vector2f(-1, 0);
-            break;
-        case sf::Keyboard::Key::S:
-            direction += sf::Vector2f(0, 1);
-            break;
-        case sf::Keyboard::Key::D:
-            direction += sf::Vector2f(1, 0);
-            break;
-        default :
-            break;
-        }
-    }
-    else
-    {
-        switch (input)
-        {
-        case sf::Keyboard::Key::Z:
-            direction += sf::Vector2f(0, 1);
-            break;
-        case sf::Keyboard::Key::Q:
-            direction += sf::Vector2f(1, 0);
-            break;
-        case sf::Keyboard::Key::S:
-            direction += sf::Vector2f(0, -1);
-            break;
-        case sf::Keyboard::Key::D:
-            direction += sf::Vector2f(-1, 0);
-            break;
-        default:
-            break;
-        }
+    case sf::Keyboard::Key::Z:
+        isMovingUp = !active;
+        break;
+    case sf::Keyboard::Key::Q:
+        isMovingLeft = !active;
+        break;
+    case sf::Keyboard::Key::S:
+        isMovingDown = !active;
+        break;
+    case sf::Keyboard::Key::D:
+        isMovingRight = !active;
+        break;
+    default :
+        break;
     }
 }
 
-void Player::render(sf::RenderWindow* mWindow) const {
-
-}

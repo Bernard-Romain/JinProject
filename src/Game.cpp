@@ -34,7 +34,6 @@ void Game::load()
 		}
 	}
 	currentRoom = rooms.begin();
-	currentRoom++;
 
 	cout << currentRoom->get()->dump("");
 }

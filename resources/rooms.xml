@@ -5,6 +5,7 @@
 	<Wall x="0" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="1840" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
+	<Monster x="1500" y="500" sprite="FatEnemy" speed="20" hp="3"/>
 </Room>
 <Room label="DeuxiemeRoom" >
 	<Wall x="100" y="100" sprite="Wall"/>

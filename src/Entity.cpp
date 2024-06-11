@@ -4,6 +4,18 @@
 
 using namespace std;
 
+Entity::Entity(sf::Vector2f position, string spriteLabel) 
+	: position { position }
+{
+	texture = sf::Texture();
+
+	texture.loadFromFile("resources/sprites/" + spriteLabel + ".png");
+	if (spriteLabel == "Tear"sv) sprite.setScale(sf::Vector2f(0.3, 0.3));
+
+	sprite.setTexture(texture);
+	sprite.setPosition(position);
+}
+
 Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
 {
 	texture = sf::Texture();

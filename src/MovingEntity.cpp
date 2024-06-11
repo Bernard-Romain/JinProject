@@ -3,6 +3,12 @@
 
 using namespace std;
 
+MovingEntity::MovingEntity(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction)
+	: Entity(position, spriteLabel)
+	, speed { speed }
+	, direction{ direction }
+{}
+
 MovingEntity::MovingEntity(pugi::xml_node node) : Entity(node), speed{ node.attribute("speed").as_float() }
 {
 }

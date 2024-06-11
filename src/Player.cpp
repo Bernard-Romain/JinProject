@@ -7,6 +7,8 @@ Player::Player(pugi::xml_node node)
     : LivingEntity(node)
 {
     sprite.setScale(sf::Vector2f(0.35, 0.35));
+
+    inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 30, sf::Vector2f (0,0), 1));
 }
 
 std::string Player::dump(std::string const& indent) const {
@@ -33,8 +35,40 @@ void Player::manageInput(sf::Keyboard::Key input, bool active)
     case sf::Keyboard::Key::D:
         isMovingRight = !active;
         break;
+    case sf::Event::MouseButtonPressed:
+        printf("aaa\n");
     default :
         break;
     }
 }
 
+void Player::shoot(sf::Vector2i mousePosition) {
+    if (!inactiveProjectiles.empty()) {
+        activeProjectiles.push_back(std::move(inactiveProjectiles.back()));
+        inactiveProjectiles.pop_back();
+
+        sf::Vector2f direction = (sf::Vector2f)mousePosition - position;
+        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+        sf::Vector2f normalise = direction;
+        if (length != 0) normalise = sf::Vector2f(direction.x / length, direction.y / length);
+        
+        activeProjectiles.back()->setDirection(normalise);
+        activeProjectiles.back()->setPosition(position);
+    }
+}
+
+void Player::render(sf::RenderWindow* mWindow) const {
+    mWindow->draw(sprite);
+    for (auto const& projectile : activeProjectiles) {
+        mWindow->draw(projectile->getSprite());
+    }
+}
+
+void Player::update()
+{
+    move();
+    sprite.setPosition(position);
+    for (auto const& projectile : activeProjectiles) {
+        projectile->update();
+    }
+}

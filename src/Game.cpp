@@ -80,6 +80,10 @@ void Game::processEvents()
 			player->manageInput(event.key.code, false);
 			break;
 
+		case sf::Event::MouseButtonPressed:
+			player->shoot(sf::Mouse::getPosition(mWindow));
+			break;
+
 		case sf::Event::Closed:
 			save();
 			mWindow.close();

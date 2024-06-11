@@ -11,6 +11,7 @@ protected:
 	sf::Sprite sprite;
 
 public:
+	explicit(false) Entity(sf::Vector2f position, std::string spriteLabel);
 	explicit(false) Entity(pugi::xml_node node);
 
 	 void render(sf::RenderWindow* mWindow) const;

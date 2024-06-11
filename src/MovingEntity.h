@@ -3,6 +3,7 @@
 
 class MovingEntity : public Entity {
 public:
+	MovingEntity(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction);
 	MovingEntity(pugi::xml_node node);
 
 	void move();

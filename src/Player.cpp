@@ -5,7 +5,9 @@ using namespace std;
 
 Player::Player(pugi::xml_node node)
     : LivingEntity(node)
-{}
+{
+    sprite.setScale(sf::Vector2f(0.35, 0.35));
+}
 
 std::string Player::dump(std::string const& indent) const {
 

@@ -9,7 +9,7 @@ enum class Room_State {
     Cleared
 };
 
-class Room
+class Room 
 {
 public:
     Room(pugi::xml_node node);

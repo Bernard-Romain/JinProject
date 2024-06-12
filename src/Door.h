@@ -3,6 +3,7 @@
 
 class Door : public Entity {
 public:
+	Door(pugi::xml_node node);
 private:
-	std::unique_ptr<Room> destination;
+	std::string destination;
 };

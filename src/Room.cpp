@@ -6,6 +6,7 @@
 #include "Wall.h"
 #include "Player.h"
 #include "Monster.h"
+#include "Door.h"
 
 using namespace std;
 
@@ -14,7 +15,7 @@ Room::Room(pugi::xml_node node)
 {
     for (auto child : node.children())
     {
-        assert((child.name() == "Wall"sv) || (child.name() == "Monster"sv) || (child.name() == "Player"sv));
+        assert((child.name() == "Wall"sv) || (child.name() == "Monster"sv) || (child.name() == "Player"sv) || (child.name() == "Door"sv));
         if (child.name() == "Wall"sv) {
             entities.push_back(make_unique<Wall>(child));
         }
@@ -23,6 +24,9 @@ Room::Room(pugi::xml_node node)
         }
         if (child.name() == "Player"sv) {
             entities.push_back(make_unique<Player>(child));
+        }
+        if (child.name() == "Door"sv) {
+            entities.push_back(make_unique<Door>(child));
         }
     }
 }

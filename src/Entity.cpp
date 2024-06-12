@@ -24,6 +24,7 @@ Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x"
 	texture.loadFromFile("resources/sprites/" + spriteLabel + ".png");
 
 	if (spriteLabel == "FatEnemy"sv) sprite.setScale(sf::Vector2f(2.5, 2.5));
+	if (spriteLabel == "Door"sv) sprite.setScale(sf::Vector2f(0.6, 0.6));
 
 	sprite.setTexture(texture);
 	sprite.setPosition(position);

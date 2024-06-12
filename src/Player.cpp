@@ -73,4 +73,5 @@ void Player::update()
     for (auto const& projectile : activeProjectiles) {
         projectile->update();
     }
+
 }

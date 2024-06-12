@@ -30,8 +30,10 @@ Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x"
 	sprite.setPosition(position);
 }
 
-int Entity::isHit()
+int Entity::isHit(sf::Sprite other)
 {
+	if (sprite.getGlobalBounds().intersects(other.getGlobalBounds()))
+		return 1;
 	return 0;
 }
 

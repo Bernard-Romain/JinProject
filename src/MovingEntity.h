@@ -6,7 +6,7 @@ public:
 	MovingEntity(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction);
 	MovingEntity(pugi::xml_node node);
 
-	void move();
+	void move(std::vector<std::unique_ptr<Entity>> const& entities);
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 	virtual std::string dump(std::string const& indent) const;
 protected:

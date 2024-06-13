@@ -1,5 +1,6 @@
 #include "MovingEntity.h"
 #include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -13,27 +14,32 @@ MovingEntity::MovingEntity(pugi::xml_node node) : Entity(node), speed{ node.attr
 {
 }
 
-void MovingEntity::move()
+void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
 {
-	lastPosition = position;
+	sf::Vector2f memo = position;
 	direction = sf::Vector2f();
 	if (isMovingUp)
-	{
 		direction += sf::Vector2f(0, 1);
-	}
 	if (isMovingDown)
-	{
 		direction += sf::Vector2f(0, -1);
-	}
 	if (isMovingLeft)
-	{
 		direction += sf::Vector2f(1, 0);
-	}
 	if (isMovingRight)
-	{
 		direction += sf::Vector2f(-1, 0);
-	}
+
 	position += direction * speed;
+	sprite.setPosition(position);
+
+	isColliding = false;
+	for (int i = 0; i < entities.size(); i++)
+	{
+		if (collide(*entities[i]))
+			isColliding = true;
+	}
+	if (isColliding) {
+		position = memo;
+		sprite.setPosition(memo);
+	}
 }
 
 std::string MovingEntity::dump(std::string const& indent) const {
@@ -45,6 +51,6 @@ std::string MovingEntity::dump(std::string const& indent) const {
 
 void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
-	move();
+	move(entities);
 	sprite.setPosition(position);
 }

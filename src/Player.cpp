@@ -68,17 +68,8 @@ void Player::render(sf::RenderWindow* mWindow) const {
 
 void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
-    isColliding = false;
-    for (int i = 0; i < entities.size(); i++)
-    {
-        if (collide(*entities[i]))
-            isColliding = true;
-    }
-    if (isColliding)
-        position = lastPosition;
-    else
-        move();
-    sprite.setPosition(position);
+    move(entities);
+
     for (auto const& projectile : activeProjectiles) {
         projectile->update(entities);
     }

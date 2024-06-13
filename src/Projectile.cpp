@@ -13,7 +13,7 @@ void Projectile::move()
 	position += direction * speed;
 }
 
-void Projectile::update() {
+void Projectile::update(std::vector<std::unique_ptr<Entity>> const &entities) {
 	this->move();
 	sprite.setPosition(position);
 }

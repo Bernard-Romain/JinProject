@@ -37,11 +37,14 @@ int Entity::isHit(sf::Sprite other)
 	return 0;
 }
 
-void Entity::collide()
+bool Entity::collide(Entity other)
 {
+	if (sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds()))
+		return true;
+	return false;
 }
 
-void Entity::update()
+void Entity::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
 }
 

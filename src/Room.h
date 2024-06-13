@@ -19,10 +19,10 @@ public:
 
     std::string dump(std::string const& indent) const;
     std::string getLabel() { return label; }
-
+    std::vector<std::unique_ptr<Entity>> entities;
 private:
     std::string label;
     Room_State state;
-    std::vector<std::unique_ptr<Entity>> entities;
+
 };
 

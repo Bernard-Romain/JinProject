@@ -15,6 +15,7 @@ MovingEntity::MovingEntity(pugi::xml_node node) : Entity(node), speed{ node.attr
 
 void MovingEntity::move()
 {
+	lastPosition = position;
 	direction = sf::Vector2f();
 	if (isMovingUp)
 	{
@@ -42,7 +43,7 @@ std::string MovingEntity::dump(std::string const& indent) const {
 	return oss.str();
 }
 
-void MovingEntity::update()
+void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
 	move();
 	sprite.setPosition(position);

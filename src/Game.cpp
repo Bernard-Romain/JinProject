@@ -57,7 +57,7 @@ void Game::render()
 void Game::update()
 {
 	currentRoom->get()->update();
-	player->update();
+	player->update(currentRoom->get()->entities);
 }
 
 void Game::save()

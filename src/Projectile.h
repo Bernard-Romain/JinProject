@@ -9,7 +9,7 @@ public:
 	sf::Sprite getSprite() { return sprite; }
 
 	void move();
-	void update() override;
+	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 private:
 	int damage;
 };

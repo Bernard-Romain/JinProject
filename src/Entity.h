@@ -9,6 +9,7 @@ protected:
 	sf::Vector2f position;
 	sf::Texture texture;
 	sf::Sprite sprite;
+	bool isColliding;
 
 public:
 	explicit(false) Entity(sf::Vector2f position, std::string spriteLabel);
@@ -16,8 +17,8 @@ public:
 
 	 void render(sf::RenderWindow* mWindow) const;
 	 int isHit(sf::Sprite other);
-	 void collide();
-	 virtual void update();
+	 bool collide(Entity other);
+	 virtual void update(std::vector<std::unique_ptr<Entity>> const &entities);
 	 virtual std::string dump(std::string const& indent) const;
 private:
 

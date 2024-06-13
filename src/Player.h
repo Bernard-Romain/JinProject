@@ -10,7 +10,7 @@ public:
 	void shoot(sf::Vector2i mousePosition);
 
 	void render(sf::RenderWindow* mWindow) const;
-	void update();
+	void update(std::vector<std::unique_ptr<Entity>> const &entities);
 private:
 	std::vector<std::unique_ptr<Projectile>> activeProjectiles;
 	std::vector<std::unique_ptr<Projectile>> inactiveProjectiles;

@@ -4,8 +4,9 @@
 
 using namespace std;
 
-Entity::Entity(sf::Vector2f position, string spriteLabel) 
+Entity::Entity(std::string label, sf::Vector2f position, string spriteLabel) 
 	: position { position }
+	, label { label }
 {
 	texture = sf::Texture();
 
@@ -16,7 +17,9 @@ Entity::Entity(sf::Vector2f position, string spriteLabel)
 	sprite.setPosition(position);
 }
 
-Entity::Entity(pugi::xml_node node) : position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
+Entity::Entity(pugi::xml_node node) 
+	: position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
+	, label { node.name() }
 {
 	texture = sf::Texture();
 

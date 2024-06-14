@@ -4,8 +4,8 @@
 
 using namespace std;
 
-MovingEntity::MovingEntity(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction) 
-	: Entity(position, spriteLabel)
+MovingEntity::MovingEntity(std::string label, sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction) 
+	: Entity(label, position, spriteLabel)
 	, speed { speed }
 	, direction{ direction }
 {}
@@ -33,8 +33,10 @@ void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
 	isColliding = false;
 	for (int i = 0; i < entities.size(); i++)
 	{
-		if (collide(*entities[i]))
+		if (collide(*entities[i])) {
 			isColliding = true;
+			this->handleCollision(entities[i].get());
+		}
 	}
 	if (isColliding) {
 		position = memo;
@@ -53,4 +55,13 @@ void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
 	move(entities);
 	sprite.setPosition(position);
+}
+
+void MovingEntity::handleCollision(Entity* const entity) {
+
+	if (entity->getLabel() == "Door"sv) {
+		
+	}
+
+
 }

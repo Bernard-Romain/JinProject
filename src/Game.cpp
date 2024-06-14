@@ -2,10 +2,12 @@
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include "Door.h"
 
 using namespace std;
 
 const sf::Time Game::TimePerFrame = sf::seconds(1.f / 60.f);
+std::string destination = "void";
 
 Game::Game()
 {
@@ -33,9 +35,29 @@ void Game::load()
 		}
 	}
 	currentRoom = rooms.begin();
+	player->setCollisionCallback(this, &Game::onPlayerCollision);
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
+}
+
+void Game::onPlayerCollision(Entity* entity) {
+	if (entity->getLabel() == "Door"sv) {
+		cout << "DOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR\n";
+		if (Door* door = dynamic_cast<Door*>(entity)) {
+			std::cout << "Confirmed: It's a door!" << std::endl;
+
+			for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+				cout << (*it)->getLabel() << " == " << door->getDestination() << " : ";
+				if ((*it)->getLabel() == door->getDestination()) {
+					currentRoom = it;
+					std::cout << "Switched to room: " << door->getDestination() << std::endl;
+					return;
+				}
+				else { cout << "false !\n"; }
+			}
+		}
+	}
 }
 
 string Game::dump(std::string const& indent) const {

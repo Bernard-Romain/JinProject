@@ -1,5 +1,7 @@
 #include "Player.h"
 #include <sstream>
+#include <iostream>
+#include "Game.h"
 
 using namespace std;
 
@@ -74,4 +76,43 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
         projectile->update(entities);
     }
 
+}
+
+void Player::handleCollision(Entity* const entity) {
+
+    if (entity->getLabel() == "Door"sv) {
+        cout << "a\n";
+        (callbackInstance->*collisionCallback)(entity);
+    }
+
+}
+
+void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
+{
+    sf::Vector2f memo = position;
+    direction = sf::Vector2f();
+    if (isMovingUp)
+        direction += sf::Vector2f(0, 1);
+    if (isMovingDown)
+        direction += sf::Vector2f(0, -1);
+    if (isMovingLeft)
+        direction += sf::Vector2f(1, 0);
+    if (isMovingRight)
+        direction += sf::Vector2f(-1, 0);
+
+    position += direction * speed;
+    sprite.setPosition(position);
+
+    isColliding = false;
+    for (int i = 0; i < entities.size(); i++)
+    {
+        if (collide(*entities[i])) {
+            isColliding = true;
+            this->handleCollision(entities[i].get());
+        }
+    }
+    if (isColliding) {
+        position = memo;
+        sprite.setPosition(memo);
+    }
 }

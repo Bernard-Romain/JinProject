@@ -3,12 +3,14 @@
 
 class MovingEntity : public Entity {
 public:
-	MovingEntity(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction);
+	MovingEntity(std::string label, sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction);
 	MovingEntity(pugi::xml_node node);
 
 	void move(std::vector<std::unique_ptr<Entity>> const& entities);
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 	virtual std::string dump(std::string const& indent) const;
+
+
 protected:
 	sf::Vector2f lastPosition;
 	float speed;
@@ -17,4 +19,6 @@ protected:
 	bool isMovingLeft;
 	bool isMovingRight;
 	sf::Vector2f direction;
+
+	void handleCollision(Entity* const entity);
 };

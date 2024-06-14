@@ -11,6 +11,7 @@ enum class Room_State {
 
 class Room 
 {
+
 public:
     Room(pugi::xml_node node);
 

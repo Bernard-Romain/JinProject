@@ -4,7 +4,7 @@
 using namespace std;
 
 Projectile::Projectile(sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction, int damage) 
-	: MovingEntity(position, spriteLabel, speed, direction)
+	: MovingEntity("Projectile", position, spriteLabel, speed, direction)
 	, damage { damage }
 {}
 

@@ -2,6 +2,8 @@
 #include "LivingEntity.h"
 #include "Projectile.h"
 
+class Game;
+
 class Player : public LivingEntity {
 public:
 	Player(pugi::xml_node node);
@@ -11,7 +13,17 @@ public:
 
 	void render(sf::RenderWindow* mWindow) const;
 	void update(std::vector<std::unique_ptr<Entity>> const &entities);
+
+	typedef void (Game::*CollisionCallback)(Entity*);
+	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
+
+	void move(std::vector<std::unique_ptr<Entity>> const& entities);
+
 private:
 	std::vector<std::unique_ptr<Projectile>> activeProjectiles;
 	std::vector<std::unique_ptr<Projectile>> inactiveProjectiles;
+
+	void handleCollision(Entity* const entity);
+	CollisionCallback collisionCallback;
+	Game* callbackInstance;
 };

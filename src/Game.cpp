@@ -35,6 +35,7 @@ void Game::load()
 		}
 	}
 	currentRoom = rooms.begin();
+	(*currentRoom)->discover();
 	player->setCollisionCallback(this, &Game::onPlayerCollision);
 
 	cout << currentRoom->get()->dump("");
@@ -52,6 +53,7 @@ void Game::onPlayerCollision(Entity* entity) {
 				if ((*it)->getLabel() == door->getDestination()) {
 					currentRoom = it;
 					std::cout << "Switched to room: " << door->getDestination() << std::endl;
+					if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
 					return;
 				}
 				else { cout << "false !\n"; }

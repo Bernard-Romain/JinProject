@@ -12,6 +12,7 @@ public:
 	std::string dump(std::string const& indent) const;
 
 	void onPlayerCollision(Entity* entity);
+	void kill(int);
 
 private:
 	void	processEvents();

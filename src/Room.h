@@ -20,6 +20,8 @@ public:
 
     void discover() { state = (monster > 0) ? Room_State::Active : Room_State::Cleared; }
 
+    void killMonster() { monster--; if (monster == 0) state = Room_State::Cleared; }
+
     std::string dump(std::string const& indent) const;
     std::string getLabel() { return label; }
     Room_State getState() { return state; }

@@ -79,6 +79,7 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
         {
             if ((*it)->collide(*entities[i])) {
                 (*it)->isColliding = true;
+                if (entities[i].get()->getLabel() == "Monster"sv) (callbackInstance->*killCallback)(i);
             }
         }
         if ((*it)->isColliding) {

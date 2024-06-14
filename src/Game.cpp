@@ -37,6 +37,7 @@ void Game::load()
 	currentRoom = rooms.begin();
 	(*currentRoom)->discover();
 	player->setCollisionCallback(this, &Game::onPlayerCollision);
+	player->setKillCallback(this, &Game::kill);
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
@@ -60,6 +61,11 @@ void Game::onPlayerCollision(Entity* entity) {
 			}
 		}
 	}
+}
+
+void Game::kill(int i) {
+	currentRoom->get()->entities.erase(currentRoom->get()->entities.begin() + i);
+	currentRoom->get()->killMonster();
 }
 
 string Game::dump(std::string const& indent) const {

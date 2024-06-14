@@ -15,7 +15,13 @@ public:
 	void update(std::vector<std::unique_ptr<Entity>> const &entities);
 
 	typedef void (Game::*CollisionCallback)(Entity*);
+	typedef void (Game::*KillCallback)(int);
 	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
+	void setKillCallback(Game* instance, KillCallback callback) {
+		callbackInstance = instance;
+		killCallback = callback;
+	}
+
 
 	void move(std::vector<std::unique_ptr<Entity>> const& entities);
 
@@ -25,5 +31,6 @@ private:
 
 	void handleCollision(Entity* const entity);
 	CollisionCallback collisionCallback;
+	KillCallback killCallback;
 	Game* callbackInstance;
 };

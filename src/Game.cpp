@@ -55,6 +55,7 @@ void Game::onPlayerCollision(Entity* entity) {
 					currentRoom = it;
 					std::cout << "Switched to room: " << door->getDestination() << std::endl;
 					if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
+					player->reversePosition();
 					return;
 				}
 				else { cout << "false !\n"; }

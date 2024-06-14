@@ -20,13 +20,7 @@ public:
 
     void discover();
 
-    void killMonster() {
-        monster--; if (monster == 0) {
-            state = Room_State::Cleared;         for (auto& door : doors) {
-                entities.push_back(move(door));
-            }
-        }
-    }
+    void killMonster();
 
     std::string dump(std::string const& indent) const;
     std::string getLabel() { return label; }
@@ -38,5 +32,7 @@ private:
     Room_State state;
 
     int monster;
+
+    void clearRoom();
 };
 

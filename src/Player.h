@@ -22,6 +22,7 @@ public:
 		killCallback = callback;
 	}
 
+	void reversePosition();
 
 	void move(std::vector<std::unique_ptr<Entity>> const& entities);
 

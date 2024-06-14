@@ -11,8 +11,12 @@ Player::Player(pugi::xml_node node)
     sprite.setScale(sf::Vector2f(0.6, 0.6));
 
     for (int i = 0; i < 10; i ++ ) {
-        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 8, sf::Vector2f(0, 0), 1));
+        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1));
     }
+}
+
+void Player::reversePosition() {
+    position = sf::Vector2f(1920, 1080) - position;
 }
 
 std::string Player::dump(std::string const& indent) const {

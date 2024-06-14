@@ -36,11 +36,18 @@ Room::Room(pugi::xml_node node)
 
 void Room::discover() {
     if (monster > 0) state = Room_State::Active;
-    else {
-        state = Room_State::Cleared;
-        for (auto &door : doors) {
-            entities.push_back(move(door));
-        }
+    else clearRoom();
+}
+
+void Room::killMonster() {
+    monster--;
+    if (monster == 0) clearRoom();
+}
+
+void Room::clearRoom() {
+    state = Room_State::Cleared;
+    for (auto& door : doors) {
+        entities.push_back(move(door));
     }
 }
 

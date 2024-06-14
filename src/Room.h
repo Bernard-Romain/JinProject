@@ -18,14 +18,21 @@ public:
     void render(sf::RenderWindow* mWindow) const;
     void update();
 
-    void discover() { state = (monster > 0) ? Room_State::Active : Room_State::Cleared; }
+    void discover();
 
-    void killMonster() { monster--; if (monster == 0) state = Room_State::Cleared; }
+    void killMonster() {
+        monster--; if (monster == 0) {
+            state = Room_State::Cleared;         for (auto& door : doors) {
+                entities.push_back(move(door));
+            }
+        }
+    }
 
     std::string dump(std::string const& indent) const;
     std::string getLabel() { return label; }
     Room_State getState() { return state; }
     std::vector<std::unique_ptr<Entity>> entities;
+    std::vector<std::unique_ptr<Entity>> doors;
 private:
     std::string label;
     Room_State state;

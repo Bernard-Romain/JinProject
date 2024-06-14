@@ -29,9 +29,19 @@ Room::Room(pugi::xml_node node)
             entities.push_back(make_unique<Player>(child));
         }
         if (child.name() == "Door"sv) {
-            entities.push_back(make_unique<Door>(child));
+            doors.push_back(make_unique<Door>(child));
         }
     }    
+}
+
+void Room::discover() {
+    if (monster > 0) state = Room_State::Active;
+    else {
+        state = Room_State::Cleared;
+        for (auto &door : doors) {
+            entities.push_back(move(door));
+        }
+    }
 }
 
 void Room::render(sf::RenderWindow* mWindow) const {

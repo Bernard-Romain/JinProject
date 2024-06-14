@@ -12,6 +12,8 @@ using namespace std;
 
 Room::Room(pugi::xml_node node)
     : label { node.attribute("label").as_string() }
+    , monster { 0 }
+    , state{ Room_State::Undiscovered }
 {
     for (auto child : node.children())
     {
@@ -21,6 +23,7 @@ Room::Room(pugi::xml_node node)
         }
         if (child.name() == "Monster"sv) {
             entities.push_back(make_unique<Monster>(child));
+            monster++;
         }
         if (child.name() == "Player"sv) {
             entities.push_back(make_unique<Player>(child));
@@ -28,7 +31,7 @@ Room::Room(pugi::xml_node node)
         if (child.name() == "Door"sv) {
             entities.push_back(make_unique<Door>(child));
         }
-    }
+    }    
 }
 
 void Room::render(sf::RenderWindow* mWindow) const {

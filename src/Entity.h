@@ -10,9 +10,9 @@ protected:
 	sf::Vector2f position;
 	sf::Texture texture;
 	sf::Sprite sprite;
-	bool isColliding;
 
 public:
+	bool isColliding;
 	explicit(false) Entity(std::string label, sf::Vector2f position, std::string spriteLabel);
 	explicit(false) Entity(pugi::xml_node node);
 

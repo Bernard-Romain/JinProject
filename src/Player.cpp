@@ -72,8 +72,21 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
     move(entities);
 
-    for (auto const& projectile : activeProjectiles) {
-        projectile->update(entities);
+    for (auto it = activeProjectiles.begin(); it != activeProjectiles.end();) {
+        (*it)->update(entities);
+        (*it)->isColliding = false;
+        for (int i = 0; i < entities.size(); i++)
+        {
+            if ((*it)->collide(*entities[i])) {
+                (*it)->isColliding = true;
+            }
+        }
+        if ((*it)->isColliding) {
+            inactiveProjectiles.push_back(std::move(*it));
+            it = activeProjectiles.erase(it);
+        }
+        else
+            ++it;
     }
 
 }

@@ -8,7 +8,7 @@ using namespace std;
 Player::Player(pugi::xml_node node)
     : LivingEntity(node)
 {
-    sprite.setScale(sf::Vector2f(0.35, 0.35));
+    sprite.setScale(sf::Vector2f(0.6, 0.6));
 
     for (int i = 0; i < 10; i ++ ) {
         inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 8, sf::Vector2f(0, 0), 1));

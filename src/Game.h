@@ -27,6 +27,8 @@ private:
 	std::vector<std::unique_ptr<Room>>::iterator currentRoom;
 	static const sf::Time	TimePerFrame;
 
-
+	bool win;
+	sf::Sprite winSprite;
+	sf::Texture winTexture;
 
 };

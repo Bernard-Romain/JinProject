@@ -41,6 +41,13 @@ void Game::load()
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
+
+	winTexture = sf::Texture();
+
+	winTexture.loadFromFile("resources/sprites/Win.png");
+	winSprite.setScale(sf::Vector2f(3, 3));
+	winSprite.setTexture(winTexture);
+	winSprite.setPosition(sf::Vector2f((mWindow.getSize().x - winSprite.getGlobalBounds().width ) / 2, (mWindow.getSize().y - winSprite.getGlobalBounds().height) / 2));
 }
 
 void Game::onPlayerCollision(Entity* entity) {
@@ -82,6 +89,7 @@ void Game::render()
 	mWindow.clear();
 	currentRoom->get()->render(&mWindow);
 	player->render(&mWindow);
+	if (win) mWindow.draw(winSprite);
 	mWindow.display();
 }
 
@@ -89,6 +97,14 @@ void Game::update()
 {
 	currentRoom->get()->update();
 	player->update(currentRoom->get()->entities);
+	win = true;
+	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+		if ((*it)->getState() != Room_State::Cleared) 
+		{
+			win = false;
+		}
+	}
+	cout << win;
 }
 
 void Game::save()

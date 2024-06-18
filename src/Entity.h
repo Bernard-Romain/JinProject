@@ -6,7 +6,7 @@
 class Entity
 {
 protected:
-	std::string label;
+	std::string label; //Permet de définir le type d'entité (joueur, monstre, porte,..)
 	sf::Vector2f position;
 	sf::Texture texture = sf::Texture();
 	sf::Sprite sprite;
@@ -24,5 +24,4 @@ public:
 
 	std::string getLabel() const { return label; }
 	bool collide(Entity const& other) const { return sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds()); }
-
 };

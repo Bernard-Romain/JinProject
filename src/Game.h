@@ -5,30 +5,38 @@
 #include <SFML/Audio.hpp>
 #include <functional>
 
+/*
+* Classe Game
+* 
+* Classe principale qui affiche le jeu, l'update à chaque seconde, contient le joueur et les différentes salles.
+*/
+
 class Game {
 
 public:
 	Game() = default;
 	void	run();
 
-	void onPlayerCollision(Entity* entity);
-	void kill(int);
+	//Deux fonctions de callbacks
+	void onPlayerCollision(Entity* entity); //appelé par le joueur lorsqu'il rentre en collision avec un objet
+	void kill(int); //appelé par le joueur lorsqu'un projectile rentre en collision avec un monstre, pour tuer proprement le monstre
 
 private:
 	void	processEvents();
 	void	load();
 	void	render();
 	void	update();
-	void	save() const;
+	void	save() const; //TODO : A implémenter, sauvegarde du xml actuel dans un fichier.
 
-	void	handleCollisionPlayerDoor(const Door* door);
-	void	setCallbacks();
-	void	checkIfWin();
+	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
+	void	setCallbacks(); //Initialise les callbacks 
+	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
+	void	initialiseSprites();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};
 	std::unique_ptr<Player> player;
 	std::vector<std::unique_ptr<Room>> rooms;
-	std::vector<std::unique_ptr<Room>>::iterator currentRoom;
+	std::vector<std::unique_ptr<Room>>::iterator currentRoom; //Permet de pointer la salle dans laquelle se trouve le joueur, qui sera render à l'écran
 	static const sf::Time	TimePerFrame;
 
 	bool win = false;

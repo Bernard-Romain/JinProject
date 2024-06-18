@@ -45,8 +45,8 @@ void Room::killMonster(int i) {
 
 void Room::clearRoom() {
     state = Room_State::Cleared;
-    for (auto& door : doors) {
-        entities.push_back(move(door));
+    for (auto& door : doors) { 
+        entities.push_back(move(door)); //Lorsque la room est Cleared, on met les portes dans entities, pour qu'elles soient affichées
     }
 }
 

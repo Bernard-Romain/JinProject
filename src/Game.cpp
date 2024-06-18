@@ -12,7 +12,7 @@ void Game::load()
 {
 	printf("Loading\n");
 
-	pugi::xml_document doc;
+	pugi::xml_document doc; //Charge le niveau depuis le fichier rooms.xml, qui permet d'initialiser les rooms
 	if (auto result = doc.load_file("resources/rooms.xml"); !result)
 	{
 		cerr << "Could not open file rooms.xml because " << result.description() << endl;
@@ -30,27 +30,14 @@ void Game::load()
 	}
 
 	currentRoom = rooms.begin();
-	(*currentRoom)->discover();
+	(*currentRoom)->discover(); //Discover permet de dire que l'on découvre la room, changeant son statut suivant les monstres dedans
 
 	setCallbacks();
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
 
-	//TODO : Une fonction pour faire ca 
-	winTexture.loadFromFile("resources/sprites/Win.png");
-	winSprite.setScale(sf::Vector2f(3, 3));
-	winSprite.setTexture(winTexture);
-	winSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - winSprite.getGlobalBounds().width ) / 2, ((float)mWindow.getSize().y - winSprite.getGlobalBounds().height) / 2));
-	looseTexture.loadFromFile("resources/sprites/Loose.png");
-	looseSprite.setScale(sf::Vector2f(3, 3));
-	looseSprite.setTexture(looseTexture);
-	looseSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - looseSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - looseSprite.getGlobalBounds().height) / 2));
-
-	winSoundBuffer.loadFromFile("resources/audios/win.mp3");
-	winSound.setBuffer(winSoundBuffer);
-	looseSoundBuffer.loadFromFile("resources/audios/loose.mp3");
-	looseSound.setBuffer(looseSoundBuffer);
+	initialiseSprites();
 }
 
 void Game::onPlayerCollision(Entity* entity) {
@@ -59,7 +46,7 @@ void Game::onPlayerCollision(Entity* entity) {
 		looseSound.play();
 	}
 	if (entity->getLabel() == "Door"sv) {
-		if (auto door = dynamic_cast<Door*>(entity)) {
+		if (auto door = dynamic_cast<Door*>(entity)) { //On double-vérife le type de l'entité, à travers son label et un dynamic_cast
 			handleCollisionPlayerDoor(door);
 		}
 	}
@@ -67,8 +54,7 @@ void Game::onPlayerCollision(Entity* entity) {
 
 void Game::kill(int i) {
 	currentRoom->get()->killMonster(i);
-
-	checkIfWin();
+	checkIfWin(); //La victoire ne peut avoir lieu qu'apres la mort d'un monstre, on vérifie donc ici si le jeu est gagné ou pas
 }
 
 void Game::checkIfWin() {
@@ -170,4 +156,20 @@ void Game::handleCollisionPlayerDoor(const Door* door) {
 		}
 		else { cout << "false !\n"; }
 	}
+}
+
+void Game::initialiseSprites() {
+	winTexture.loadFromFile("resources/sprites/Win.png");
+	winSprite.setScale(sf::Vector2f(3, 3));
+	winSprite.setTexture(winTexture);
+	winSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - winSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - winSprite.getGlobalBounds().height) / 2));
+	looseTexture.loadFromFile("resources/sprites/Loose.png");
+	looseSprite.setScale(sf::Vector2f(3, 3));
+	looseSprite.setTexture(looseTexture);
+	looseSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - looseSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - looseSprite.getGlobalBounds().height) / 2));
+
+	winSoundBuffer.loadFromFile("resources/audios/win.mp3");
+	winSound.setBuffer(winSoundBuffer);
+	looseSoundBuffer.loadFromFile("resources/audios/loose.mp3");
+	looseSound.setBuffer(looseSoundBuffer);
 }

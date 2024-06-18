@@ -9,7 +9,8 @@ Entity::Entity(std::string const &label, sf::Vector2f const &position, string co
 	, position { position }
 {
 	texture.loadFromFile("resources/sprites/" + spriteLabel + ".png");
-	if (spriteLabel == "Tear"sv) sprite.setScale(sf::Vector2f(0.3f, 0.3f));
+
+	if (spriteLabel == "Tear"sv) sprite.setScale(sf::Vector2f(0.3f, 0.3f));  
 
 	sprite.setTexture(texture);
 	sprite.setPosition(position);

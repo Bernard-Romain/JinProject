@@ -6,7 +6,7 @@
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="1720" y="400" sprite="Door" destination="DeuxiemeRoom"/>
 	<Door x ="-50" y="400" sprite="Door" destination="TroisiemeRoom"/>
-	<Monster x="1500" y="500" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="500" sprite="FatEnemy" speed="20" hp="3"/>
 </Room>
 <Room label="DeuxiemeRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>
@@ -14,7 +14,9 @@
 	<Wall x="1840" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="-50" y="400" sprite="Door" destination="PremiereRoom"/>
-	<Monster x="1500" y="500" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="500" y="200" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="200" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1500" y="200" sprite="FatEnemy" speed="20" hp="3"/>
 </Room>
 <Room label="TroisiemeRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>
@@ -22,6 +24,7 @@
 	<Wall x="1840" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="1720" y="400" sprite="Door" destination="PremiereRoom"/>
-	<Monster x="1500" y="500" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="200" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="700" sprite="FatEnemy" speed="20" hp="3"/>
 </Room>
 <Player x="200" y="200" sprite="Player" speed="20" hp="3"/>

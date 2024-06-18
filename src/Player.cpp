@@ -16,7 +16,7 @@ Player::Player(pugi::xml_node node)
 }
 
 void Player::reversePosition() {
-    position = sf::Vector2f(1920, 1080) - position;
+    position = sf::Vector2f(1500, 725);
     sprite.setPosition(position);
 }
 

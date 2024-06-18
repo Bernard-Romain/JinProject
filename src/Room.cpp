@@ -12,8 +12,6 @@ using namespace std;
 
 Room::Room(pugi::xml_node node)
     : label { node.attribute("label").as_string() }
-    , monster { 0 }
-    , state{ Room_State::Undiscovered }
 {
     for (auto child : node.children())
     {
@@ -56,10 +54,6 @@ void Room::render(sf::RenderWindow* mWindow) const {
     for (auto const& entity : entities) {
         entity.get()->render(mWindow);
     }
-}
-
-void Room::update() {
-
 }
 
 std::string Room::dump(std::string const& indent) const{

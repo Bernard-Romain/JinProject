@@ -1,6 +1,7 @@
 #pragma once
 #include "LivingEntity.h"
 #include "Projectile.h"
+#include <functional>
 
 class Game;
 
@@ -16,13 +17,10 @@ public:
 	void render(sf::RenderWindow* mWindow) const override;
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 
-	using CollisionCallback = void (Game::*)(Entity *);
-	using KillCallback = void (Game::*)(int) const;
-	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
-	void setKillCallback(Game* instance, KillCallback callback) {
-		callbackInstance = instance;
-		killCallback = callback;
-	}
+	using CollisionCallback = std::function<void(Entity*)>;
+	using KillCallback = std::function<void(int)>;
+	void setCollisionCallback(Game* instance, CollisionCallback const& callback) { callbackInstance = instance;  collisionCallback = callback; }
+	void setKillCallback(Game* instance, KillCallback const& callback) { callbackInstance = instance; killCallback = callback; }
 
 	void reversePosition(); //TODO : Comprendre pourquoi ca marche pas
 

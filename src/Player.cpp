@@ -103,10 +103,6 @@ void Player::handleCollision(Entity* const entity) {
         reversePosition();
         (callbackInstance->*collisionCallback)(entity);
     }
-    if (entity->getLabel() == "Monster"sv) {
-        reversePosition();
-        (callbackInstance->*collisionCallback)(entity);
-    }
 
 }
 

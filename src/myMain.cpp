@@ -5,6 +5,7 @@
 #include <algorithm>
 #include "Game.h"
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 
 using namespace std;

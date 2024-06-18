@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 using namespace std;
 
@@ -40,9 +41,22 @@ void Game::load()
 	winSprite.setScale(sf::Vector2f(3, 3));
 	winSprite.setTexture(winTexture);
 	winSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - winSprite.getGlobalBounds().width ) / 2, ((float)mWindow.getSize().y - winSprite.getGlobalBounds().height) / 2));
+	looseTexture.loadFromFile("resources/sprites/Loose.png");
+	looseSprite.setScale(sf::Vector2f(3, 3));
+	looseSprite.setTexture(looseTexture);
+	looseSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - looseSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - looseSprite.getGlobalBounds().height) / 2));
+
+	winSoundBuffer.loadFromFile("resources/audios/win.mp3");
+	winSound.setBuffer(winSoundBuffer);
+	looseSoundBuffer.loadFromFile("resources/audios/loose.mp3");
+	looseSound.setBuffer(looseSoundBuffer);
 }
 
 void Game::onPlayerCollision(Entity* entity) {
+	if (entity->getLabel() == "Monster"sv) {
+		loose = true;
+		looseSound.play();
+	}
 	if (entity->getLabel() == "Door"sv) {
 		if (auto door = dynamic_cast<Door*>(entity)) {
 			handleCollisionPlayerDoor(door);
@@ -60,22 +74,27 @@ void Game::render()
 	currentRoom->get()->render(&mWindow);
 	player->render(&mWindow);
 	if (win) mWindow.draw(winSprite);
+	if (loose) mWindow.draw(looseSprite);
 	mWindow.display();
 }
 
 void Game::update()
 {
-	currentRoom->get()->update();
-	player->update(currentRoom->get()->entities);
-	//TODO : CHANGER CA
-	win = true;
-	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
-		if ((*it)->getState() != Room_State::Cleared) 
-		{
-			win = false;
+	if (!(win || loose))
+	{
+		currentRoom->get()->update();
+		player->update(currentRoom->get()->entities);
+
+		//TODO : CHANGER CA
+		win = true;
+		for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+			if ((*it)->getState() != Room_State::Cleared)
+			{
+				win = false;
+			}
 		}
+		if (win) winSound.play();
 	}
-	cout << win;
 }
 
 void Game::save () const

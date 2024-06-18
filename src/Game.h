@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Room.h"
 #include "Door.h"
+#include <SFML/Audio.hpp>
 
 class Game {
 
@@ -28,8 +29,17 @@ private:
 	std::vector<std::unique_ptr<Room>>::iterator currentRoom;
 	static const sf::Time	TimePerFrame;
 
-	bool win;
+	bool win = false;
 	sf::Sprite winSprite;
-	sf::Texture winTexture = sf::Texture();
+	sf::Texture winTexture;
 
+	bool loose = false;
+	sf::Sprite looseSprite;
+	sf::Texture looseTexture;
+
+	sf::SoundBuffer winSoundBuffer;
+	sf::Sound winSound;
+
+	sf::SoundBuffer looseSoundBuffer;
+	sf::Sound looseSound;
 };

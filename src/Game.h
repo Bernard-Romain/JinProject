@@ -1,25 +1,26 @@
-#pragma once
+ #pragma once
 #include "Player.h"
 #include "Room.h"
+#include "Door.h"
 
 class Game {
 
-	static std::string destination;
-
 public:
-	Game();
+	Game() = default;
 	void	run();
-	std::string dump(std::string const& indent) const;
 
 	void onPlayerCollision(Entity* entity);
-	void kill(int);
+	void kill(int) const;
 
 private:
 	void	processEvents();
 	void	load();
 	void	render();
 	void	update();
-	void	save();
+	void	save() const;
+
+	void	handleCollisionPlayerDoor(const Door* door);
+	void	setCallbacks();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};
 	std::unique_ptr<Player> player;
@@ -29,6 +30,6 @@ private:
 
 	bool win;
 	sf::Sprite winSprite;
-	sf::Texture winTexture;
+	sf::Texture winTexture = sf::Texture();
 
 };

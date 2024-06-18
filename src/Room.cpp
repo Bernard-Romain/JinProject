@@ -39,8 +39,9 @@ void Room::discover() {
     else clearRoom();
 }
 
-void Room::killMonster() {
+void Room::killMonster(int i) {
     monster--;
+    entities.erase(entities.begin() + i);
     if (monster == 0) clearRoom();
 }
 

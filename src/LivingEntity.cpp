@@ -8,8 +8,9 @@ LivingEntity::LivingEntity(pugi::xml_node node)
 	, hp{ node.attribute("hp").as_int() }
 {}
 
-void LivingEntity::damage()
+void LivingEntity::damage() const
 {
+	//A IMPLEMENTER, SI L'ON VEUT QUE LES ENNEMIS/ LE JOUEUR NE MEURE PAS EN UN COUP
 }
 
 std::string LivingEntity::dump(std::string const& indent) const {

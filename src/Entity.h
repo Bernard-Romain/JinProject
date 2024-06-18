@@ -8,21 +8,21 @@ class Entity
 protected:
 	std::string label;
 	sf::Vector2f position;
-	sf::Texture texture;
+	sf::Texture texture = sf::Texture();
 	sf::Sprite sprite;
 
 public:
-	bool isColliding;
-	explicit(false) Entity(std::string label, sf::Vector2f position, std::string spriteLabel);
+	bool isColliding = false;
+
+	explicit(false) Entity(std::string const &label, sf::Vector2f const &position, std::string const &spriteLabel);
 	explicit(false) Entity(pugi::xml_node node);
+	virtual ~Entity() = default;
+	
+	virtual void update(std::vector<std::unique_ptr<Entity>> const& entities) {} ;
+	virtual std::string dump(std::string const& indent) const;
+	void render(sf::RenderWindow* mWindow) const;
 
-	 void render(sf::RenderWindow* mWindow) const;
-	 int isHit(sf::Sprite other);
-	 bool collide(Entity other);
-	 virtual void update(std::vector<std::unique_ptr<Entity>> const &entities);
-	 virtual std::string dump(std::string const& indent) const;
-
-	 std::string getLabel() { return label; }
-private:
+	std::string getLabel() const { return label; }
+	bool collide(Entity const& other) const { return sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds()); }
 
 };

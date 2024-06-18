@@ -20,7 +20,7 @@ public:
 
     void discover();
 
-    void killMonster();
+    void killMonster(int i);
 
     std::string dump(std::string const& indent) const;
     std::string getLabel() { return label; }

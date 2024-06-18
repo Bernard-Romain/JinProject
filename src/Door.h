@@ -3,8 +3,11 @@
 
 class Door : public Entity {
 public:
-	Door(pugi::xml_node node);
-	std::string getDestination() { return destination; }
+	explicit(false) Door(pugi::xml_node node);
+
+	//Getters
+	std::string getDestination() const { return destination; }
 private:
 	std::string destination;
+
 };

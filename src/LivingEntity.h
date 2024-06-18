@@ -3,10 +3,10 @@
 
 class LivingEntity : public MovingEntity {
 public:
-	LivingEntity(pugi::xml_node node);
+	explicit(false) LivingEntity(pugi::xml_node node);
 
-	virtual std::string dump(std::string const& indent) const;
-	void damage();
+	std::string dump(std::string const& indent) const override;
+	void damage() const;
 private:
 	int hp;
 };

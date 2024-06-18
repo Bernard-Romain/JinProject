@@ -16,6 +16,7 @@ protected:
 	sf::Vector2f direction = sf::Vector2f();
 	sf::Vector2f lastPosition = sf::Vector2f();
 
+	//Permet de gérer le déplacement orthogonal du joueur
 	bool isMovingUp = false;
 	bool isMovingDown = false;
 	bool isMovingLeft = false;

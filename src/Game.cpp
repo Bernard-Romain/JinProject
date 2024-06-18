@@ -151,7 +151,7 @@ void Game::handleCollisionPlayerDoor(const Door* door) {
 			currentRoom = it;
 			std::cout << "Switched to room: " << door->getDestination() << std::endl;
 			if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
-			player->reversePosition();
+			player->updatePositionWhenChangingRoom();
 			return;
 		}
 		else { cout << "false !\n"; }

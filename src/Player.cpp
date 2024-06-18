@@ -15,7 +15,7 @@ Player::Player(pugi::xml_node node)
     }
 }
 
-void Player::reversePosition() {
+void Player::updatePositionWhenChangingRoom() {
     lastPosition = sf::Vector2f(1000, 500);
     sprite.setPosition(lastPosition);
 }
@@ -77,6 +77,7 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
     move(entities);
 
+    //Pour chaque projectile actif, on le fait bouger et on regarde ses collisions
     for (auto it = activeProjectiles.begin(); it != activeProjectiles.end();) {
         (*it)->update(entities);
         (*it)->isColliding = false;
@@ -98,15 +99,10 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 }
 
 void Player::handleCollision(Entity* const entity) {
-    if (entity->getLabel() == "Monster"sv) {
-        reversePosition();
+    if ((entity->getLabel() == "Monster"sv) || (entity->getLabel() == "Door"sv)) {
+        updatePositionWhenChangingRoom();
         (callbackInstance->*collisionCallback)(entity);
     }
-    if (entity->getLabel() == "Door"sv) {
-        reversePosition();
-        (callbackInstance->*collisionCallback)(entity);
-    }
-
 }
 
 void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
@@ -126,7 +122,7 @@ void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
     sprite.setPosition(position);
 
     isColliding = false;
-    for (auto const& entity : entities)
+    for (auto const& entity : entities) //Fait le tour des entités pour checker les collisions
     {
         if (collide(*entity)) {
             isColliding = true;

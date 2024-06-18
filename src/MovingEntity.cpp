@@ -17,7 +17,7 @@ MovingEntity::MovingEntity(pugi::xml_node node)
 
 void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
 {
-	//TODO : REMOVE OR FIND HOW TO CALL HANDLECOLLISION OF PLAYER FROM HERE
+	//TODO : doublon avec le player
 	lastPosition = position;
 
 	direction = sf::Vector2f(0, 0);
@@ -61,5 +61,5 @@ void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const& entities)
 }
 
 void MovingEntity::handleCollision(Entity* const entity) const {
-	//TODO : IMPLEMENT HERE FOR PLAYER OR DELETE
+	//TODO : implémenter ici, ou supprimer (a voir avec le joueur)
 }

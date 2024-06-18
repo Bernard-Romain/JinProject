@@ -37,6 +37,7 @@ void Game::load()
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
 
+	//TODO : Une fonction pour faire ca 
 	winTexture.loadFromFile("resources/sprites/Win.png");
 	winSprite.setScale(sf::Vector2f(3, 3));
 	winSprite.setTexture(winTexture);
@@ -64,8 +65,21 @@ void Game::onPlayerCollision(Entity* entity) {
 	}
 }
 
-void Game::kill(int i) const {
+void Game::kill(int i) {
 	currentRoom->get()->killMonster(i);
+
+	checkIfWin();
+}
+
+void Game::checkIfWin() {
+	win = true;
+	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
+		if ((*it)->getState() != Room_State::Cleared)
+		{
+			win = false;
+		}
+	}
+	if (win) winSound.play();
 }
 
 void Game::render()
@@ -80,20 +94,7 @@ void Game::render()
 
 void Game::update()
 {
-	if (!(win || loose))
-	{
-		player->update(currentRoom->get()->entities);
-
-		//TODO : CHANGER CA
-		win = true;
-		for (auto it = rooms.begin(); it != rooms.end(); ++it) {
-			if ((*it)->getState() != Room_State::Cleared)
-			{
-				win = false;
-			}
-		}
-		if (win) winSound.play();
-	}
+	if (!(win || loose)) player->update(currentRoom->get()->entities);
 }
 
 void Game::save () const

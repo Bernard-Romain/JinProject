@@ -12,7 +12,7 @@ public:
 	void	run();
 
 	void onPlayerCollision(Entity* entity);
-	void kill(int) const;
+	void kill(int);
 
 private:
 	void	processEvents();
@@ -23,6 +23,7 @@ private:
 
 	void	handleCollisionPlayerDoor(const Door* door);
 	void	setCallbacks();
+	void	checkIfWin();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};
 	std::unique_ptr<Player> player;

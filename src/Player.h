@@ -17,7 +17,7 @@ public:
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 
 	using CollisionCallback = void (Game::*)(Entity*);
-	using KillCallback = void (Game::*)(int) const;
+	using KillCallback = void (Game::*)(int);
 
 	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
 	void setKillCallback(Game* instance, KillCallback callback) { callbackInstance = instance; killCallback = callback; }

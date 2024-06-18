@@ -16,8 +16,8 @@ Player::Player(pugi::xml_node node)
 }
 
 void Player::reversePosition() {
-    position = sf::Vector2f(1500, 725);
-    sprite.setPosition(position);
+    lastPosition = sf::Vector2f(1000, 500);
+    sprite.setPosition(lastPosition);
 }
 
 std::string Player::dump(std::string const& indent) const {
@@ -98,7 +98,10 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 }
 
 void Player::handleCollision(Entity* const entity) {
-
+    if (entity->getLabel() == "Monster"sv) {
+        reversePosition();
+        (callbackInstance->*collisionCallback)(entity);
+    }
     if (entity->getLabel() == "Door"sv) {
         reversePosition();
         (callbackInstance->*collisionCallback)(entity);

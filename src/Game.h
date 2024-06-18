@@ -3,6 +3,7 @@
 #include "Room.h"
 #include "Door.h"
 #include <SFML/Audio.hpp>
+#include <functional>
 
 class Game {
 

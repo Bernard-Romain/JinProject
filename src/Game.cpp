@@ -82,7 +82,6 @@ void Game::update()
 {
 	if (!(win || loose))
 	{
-		currentRoom->get()->update();
 		player->update(currentRoom->get()->entities);
 
 		//TODO : CHANGER CA

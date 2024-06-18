@@ -3,22 +3,23 @@
 
 class MovingEntity : public Entity {
 public:
-	MovingEntity(std::string label, sf::Vector2f position, std::string spriteLabel, float speed, sf::Vector2f direction);
-	MovingEntity(pugi::xml_node node);
+	explicit(false) MovingEntity(std::string const &label, sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction);
+	explicit(false) MovingEntity(pugi::xml_node node);
 
-	void move(std::vector<std::unique_ptr<Entity>> const& entities);
+	virtual void move(std::vector<std::unique_ptr<Entity>> const& entities);
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
-	virtual std::string dump(std::string const& indent) const;
+	std::string dump(std::string const& indent) const override;
 
 
 protected:
-	sf::Vector2f lastPosition;
 	float speed;
-	bool isMovingUp;
-	bool isMovingDown;
-	bool isMovingLeft;
-	bool isMovingRight;
-	sf::Vector2f direction;
+	sf::Vector2f direction = sf::Vector2f();
+	sf::Vector2f lastPosition = sf::Vector2f();
 
-	void handleCollision(Entity* const entity);
+	bool isMovingUp = false;
+	bool isMovingDown = false;
+	bool isMovingLeft = false;
+	bool isMovingRight = false;
+
+	void handleCollision(Entity* const entity) const;
 };

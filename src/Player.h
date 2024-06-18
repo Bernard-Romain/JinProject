@@ -5,33 +5,36 @@
 class Game;
 
 class Player : public LivingEntity {
+
 public:
-	Player(pugi::xml_node node);
-	std::string dump(std::string const& indent) const;
+	explicit(false) Player(pugi::xml_node node);
+
+	std::string dump(std::string const& indent) const override;
 	void manageInput(sf::Keyboard::Key input, bool active);
 	void shoot(sf::Vector2i mousePosition);
 
-	void render(sf::RenderWindow* mWindow) const;
-	void update(std::vector<std::unique_ptr<Entity>> const &entities);
+	void render(sf::RenderWindow* mWindow) const override;
+	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 
-	typedef void (Game::*CollisionCallback)(Entity*);
-	typedef void (Game::*KillCallback)(int) const;
+	using CollisionCallback = void (Game::*)(Entity *);
+	using KillCallback = void (Game::*)(int) const;
 	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
 	void setKillCallback(Game* instance, KillCallback callback) {
 		callbackInstance = instance;
 		killCallback = callback;
 	}
 
-	void reversePosition();
+	void reversePosition(); //TODO : Comprendre pourquoi ca marche pas
 
-	void move(std::vector<std::unique_ptr<Entity>> const& entities);
+	void move(std::vector<std::unique_ptr<Entity>> const& entities) override;
 
 private:
 	std::vector<std::unique_ptr<Projectile>> activeProjectiles;
 	std::vector<std::unique_ptr<Projectile>> inactiveProjectiles;
 
 	void handleCollision(Entity* const entity);
-	CollisionCallback collisionCallback;
-	KillCallback killCallback;
-	Game* callbackInstance;
+
+	CollisionCallback collisionCallback = nullptr;
+	KillCallback killCallback = nullptr;
+	Game* callbackInstance = nullptr;
 };

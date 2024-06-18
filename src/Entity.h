@@ -20,7 +20,7 @@ public:
 	
 	virtual void update(std::vector<std::unique_ptr<Entity>> const& entities) {} ;
 	virtual std::string dump(std::string const& indent) const;
-	void render(sf::RenderWindow* mWindow) const;
+	virtual void render(sf::RenderWindow* mWindow) const;
 
 	std::string getLabel() const { return label; }
 	bool collide(Entity const& other) const { return sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds()); }

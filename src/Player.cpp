@@ -8,7 +8,7 @@ using namespace std;
 Player::Player(pugi::xml_node node)
     : LivingEntity(node)
 {
-    sprite.setScale(sf::Vector2f(0.6, 0.6));
+    sprite.setScale(sf::Vector2f(0.6f, 0.6f));
 
     for (int i = 0; i < 10; i ++ ) {
         inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1));
@@ -17,6 +17,7 @@ Player::Player(pugi::xml_node node)
 
 void Player::reversePosition() {
     position = sf::Vector2f(1920, 1080) - position;
+    sprite.setPosition(position);
 }
 
 std::string Player::dump(std::string const& indent) const {
@@ -32,20 +33,19 @@ void Player::manageInput(sf::Keyboard::Key input, bool active)
     switch (input)
     {
     case sf::Keyboard::Key::Z:
-        isMovingUp = !active;
+        isMovingUp = active;
         break;
     case sf::Keyboard::Key::Q:
-        isMovingLeft = !active;
+        isMovingLeft = active;
         break;
     case sf::Keyboard::Key::S:
-        isMovingDown = !active;
+        isMovingDown = active;
         break;
     case sf::Keyboard::Key::D:
-        isMovingRight = !active;
+        isMovingRight = active;
         break;
-    case sf::Event::MouseButtonPressed:
-        printf("aaa\n");
     default :
+        //DONOTHIN
         break;
     }
 }
@@ -56,7 +56,8 @@ void Player::shoot(sf::Vector2i mousePosition) {
         inactiveProjectiles.pop_back();
 
         sf::Vector2f direction = (sf::Vector2f)mousePosition - position;
-        float length = std::sqrt(direction.x * direction.x + direction.y * direction.y);
+        float length = sqrt(direction.x * direction.x + direction.y * direction.y);
+
         sf::Vector2f normalise = direction;
         if (length != 0) normalise = sf::Vector2f(direction.x / length, direction.y / length);
         
@@ -99,7 +100,7 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 void Player::handleCollision(Entity* const entity) {
 
     if (entity->getLabel() == "Door"sv) {
-        cout << "a\n";
+        reversePosition();
         (callbackInstance->*collisionCallback)(entity);
     }
 
@@ -107,30 +108,31 @@ void Player::handleCollision(Entity* const entity) {
 
 void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
 {
-    sf::Vector2f memo = position;
+    lastPosition = position;
     direction = sf::Vector2f();
     if (isMovingUp)
-        direction += sf::Vector2f(0, 1);
-    if (isMovingDown)
         direction += sf::Vector2f(0, -1);
+    if (isMovingDown)
+        direction += sf::Vector2f(0, 1);
     if (isMovingLeft)
-        direction += sf::Vector2f(1, 0);
-    if (isMovingRight)
         direction += sf::Vector2f(-1, 0);
+    if (isMovingRight)
+        direction += sf::Vector2f(1, 0);
 
     position += direction * speed;
     sprite.setPosition(position);
 
     isColliding = false;
-    for (int i = 0; i < entities.size(); i++)
+    for (auto const& entity : entities)
     {
-        if (collide(*entities[i])) {
+        if (collide(*entity)) {
             isColliding = true;
-            this->handleCollision(entities[i].get());
+            this->handleCollision(entity.get());
         }
     }
+
     if (isColliding) {
-        position = memo;
-        sprite.setPosition(memo);
+        position = lastPosition;
+        sprite.setPosition(lastPosition);
     }
 }

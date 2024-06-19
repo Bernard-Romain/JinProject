@@ -23,7 +23,7 @@ TEST(TestCreationRoomAPartirDuXML, RoomSansPorte) {
     std::string s = R"(<?xml version = "1.0"?>
                        <Room label="DoorlessRoom" >
                            <Wall x="0" y="0" sprite="Wall"/>
-                           <Monster x="10" y="10" sprite="Monster" speed="20" hp="3"/>
+                           <Monster x="10" y="10" sprite="FatEnemy" speed="20" hp="3"/>
                            <Player x="40" y="40" sprite="Player" speed="20" hp="3"/>
                        </Room>)";
     pugi::xml_document doc;

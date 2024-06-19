@@ -14,5 +14,9 @@ endif()
 # using the GoogleTest CMake module (which was included in root CMakeLists.txt).
 gtest_discover_tests(unitTests)
 
+add_custom_target(copy-resources-test ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/resources C:/Users/romai/Bureau/Cours/JIN/CAASI/out/build/x64-Debug/unitTests/resources)
+add_dependencies(unitTests copy-resources-test)
+
 
 

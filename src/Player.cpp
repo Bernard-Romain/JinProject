@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Projectile.h"
 #include <sstream>
 #include <iostream>
 #include "Game.h"
@@ -11,7 +12,7 @@ Player::Player(pugi::xml_node node)
     sprite.setScale(sf::Vector2f(0.6f, 0.6f));
 
     for (int i = 0; i < 10; i ++ ) {
-        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1));
+        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1, this));
     }
 }
 
@@ -72,27 +73,42 @@ void Player::render(sf::RenderWindow* mWindow) const {
     }
 }
 
+void Player::desactiveProjectile(Projectile* projectile) {/*
+    auto it = std::find_if(activeProjectiles.begin(), activeProjectiles.end(),
+        [projectile](const std::unique_ptr<Projectile>& p) {
+            return p.get() == projectile;
+        });
+    
+    if (it != activeProjectiles.end()) {
+        inactiveProjectiles.push_back(std::move(*it));
+        activeProjectiles.erase(it);
+        cout << "WE FINALLY GET THERE\n";
+    }
+    else {
+        cerr << "Projectile not found in activeProjectiles." << endl;
+    }*/
+    cout << "AAA\n"
+}
+
+void collidee(Entity& first, Entity& second) {
+    first.collide_with(second);
+    second.collide_with(first);
+}
+
 void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
     move();
-
+    
     //Pour chaque projectile actif, on le fait bouger et on regarde ses collisions
-    for (auto it = activeProjectiles.begin(); it != activeProjectiles.end();) {
-        (*it)->update(entities);
-        (*it)->isColliding = false;
+    for (auto& projectile : activeProjectiles) {
+        projectile->update(entities);
         for (int i = 0; i < entities.size(); i++)
         {
-            if ((*it)->collide(*entities[i])) {
-                (*it)->isColliding = true;
-                if (entities[i].get()->getLabel() == "Monster"sv) (callbackInstance->*killCallback)(i);
+            if (projectile->collide(*entities[i])) {
+                collidee(*projectile, *entities[i]);
+                break;
             }
         }
-        if ((*it)->isColliding) {
-            inactiveProjectiles.push_back(std::move(*it));
-            it = activeProjectiles.erase(it);
-        }
-        else
-            ++it;
     }
 
 }

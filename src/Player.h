@@ -1,6 +1,5 @@
 #pragma once
 #include "LivingEntity.h"
-#include "Projectile.h"
 #include <iostream>
 
 class Game;
@@ -26,6 +25,7 @@ public:
 	void updatePositionWhenChangingRoom(); 
 
 	void move() override;
+	void desactiveProjectile(Projectile* projectile);
 
 	//V2 Collisions
 	void collide_with(Entity& other) override {

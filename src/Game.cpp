@@ -78,9 +78,23 @@ void Game::render()
 	mWindow.display();
 }
 
+void collide(Entity& first, Entity& second) {
+	first.collide_with(second);
+}
+
 void Game::update()
 {
-	if (!(win || loose)) player->update(currentRoom->get()->entities);
+	if (!(win || loose)) //TODO :le changer de place, peut etre ne plus rentrer dans cette boucle quand c'est gagné
+	{
+		player->update(currentRoom->get()->entities);
+
+		for (auto& entity : currentRoom->get()->entities) {
+			if (entity.get()->collide(*player.get())) {
+				collide(*player.get(), *entity);
+				collide(*entity, *player.get());
+			}
+		}
+	}
 }
 
 void Game::save () const

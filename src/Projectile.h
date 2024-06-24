@@ -10,6 +10,17 @@ public:
 
 	void move(); //TODO : Regler le fait que move de movingEntity prend maitenant des arguments
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
+
+	//V2 Collisions
+	void collide_with(Entity& other) override {
+		other.collide_with(*this);
+	};
+
+	void collide_with(Wall& other) override {};
+	void collide_with(Door& other) override {};
+	void collide_with(Player& other) override {};
+	void collide_with(Monster& other) override {};
+	void collide_with(Projectile& other) override {};
 private:
 	int damage;
 };

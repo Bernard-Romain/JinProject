@@ -16,8 +16,7 @@ Player::Player(pugi::xml_node node)
 }
 
 void Player::updatePositionWhenChangingRoom() {
-    lastPosition = sf::Vector2f(1000, 500);
-    sprite.setPosition(lastPosition);
+
 }
 
 std::string Player::dump(std::string const& indent) const {
@@ -75,7 +74,7 @@ void Player::render(sf::RenderWindow* mWindow) const {
 
 void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
-    move(entities);
+    move();
 
     //Pour chaque projectile actif, on le fait bouger et on regarde ses collisions
     for (auto it = activeProjectiles.begin(); it != activeProjectiles.end();) {
@@ -105,9 +104,10 @@ void Player::handleCollision(Entity* const entity) {
     }
 }
 
-void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
+void Player::move()
 {
     lastPosition = position;
+
     direction = sf::Vector2f();
     if (isMovingUp)
         direction += sf::Vector2f(0, -1);
@@ -120,18 +120,18 @@ void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
 
     position += direction * speed;
     sprite.setPosition(position);
+}
 
-    isColliding = false;
-    for (auto const& entity : entities) //Fait le tour des entités pour checker les collisions
-    {
-        if (collide(*entity)) {
-            isColliding = true;
-            this->handleCollision(entity.get());
-        }
-    }
+void Player::collide_with(Wall& other) {
+    position = lastPosition;
+    sprite.setPosition(lastPosition);
+}
 
-    if (isColliding) {
-        position = lastPosition;
-        sprite.setPosition(lastPosition);
-    }
+void Player::collide_with(Door& other) {
+    lastPosition = sf::Vector2f(1000, 500);
+    sprite.setPosition(lastPosition);
+}
+
+void Player::collide_with(Monster& other) {
+    callbackInstance->triggerLoose();
 }

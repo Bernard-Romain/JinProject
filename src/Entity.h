@@ -2,6 +2,12 @@
 #include <string>
 #include "pugixml.hpp"
 #include <SFML/Graphics.hpp>
+ 
+class Player;
+class Monster;
+class Projectile;
+class Door;
+class Wall;
 
 class Entity
 {
@@ -24,4 +30,13 @@ public:
 
 	std::string getLabel() const { return label; }
 	bool collide(Entity const& other) const { return sprite.getGlobalBounds().intersects(other.sprite.getGlobalBounds()); }
+
+	//V2 for collisions
+	virtual void collide_with(Entity& other) = 0;
+
+	virtual void collide_with(Wall& other) = 0;
+	virtual void collide_with(Door& other) = 0;
+	virtual void collide_with(Player& other) = 0;
+	virtual void collide_with(Monster& other) = 0;
+	virtual void collide_with(Projectile& other) = 0;
 };

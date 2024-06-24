@@ -15,7 +15,7 @@ MovingEntity::MovingEntity(pugi::xml_node node)
 	, speed{ node.attribute("speed").as_float() }
 {}
 
-void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
+void MovingEntity::move()
 {
 	//TODO : doublon avec le player
 	lastPosition = position;
@@ -32,20 +32,6 @@ void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
 
 	position += direction * speed;
 	sprite.setPosition(position);
-
-	isColliding = false;
-	for (auto const& entity : entities)
-	{
-		if (collide(*entity)) {
-			isColliding = true;
-			this->handleCollision(entity.get());
-		}
-	}
-
-	if (isColliding) {
-		position = lastPosition;
-		sprite.setPosition(lastPosition);
-	}
 }
 
 std::string MovingEntity::dump(std::string const& indent) const {
@@ -57,7 +43,7 @@ std::string MovingEntity::dump(std::string const& indent) const {
 
 void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const& entities)
 {
-	move(entities);
+	move();
 }
 
 void MovingEntity::handleCollision(Entity* const entity) const {

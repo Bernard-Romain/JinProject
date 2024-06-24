@@ -21,6 +21,12 @@ public:
 	void onPlayerCollision(Entity* entity); //appelé par le joueur lorsqu'il rentre en collision avec un objet
 	void kill(int); //appelé par le joueur lorsqu'un projectile rentre en collision avec un monstre, pour tuer proprement le monstre
 
+	void triggerLoose() {
+		loose = true;
+		looseSound.play();
+	}
+
+
 private:
 	void	processEvents();
 	void	load();

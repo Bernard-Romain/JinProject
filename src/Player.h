@@ -1,6 +1,7 @@
 #pragma once
 #include "LivingEntity.h"
 #include "Projectile.h"
+#include <iostream>
 
 class Game;
 
@@ -24,9 +25,24 @@ public:
 
 	void updatePositionWhenChangingRoom(); 
 
-	void move(std::vector<std::unique_ptr<Entity>> const& entities) override;
+	void move() override;
+
+	//V2 Collisions
+	void collide_with(Entity& other) override {
+		other.collide_with(*this);
+	};
+
+	void collide_with(Wall& other) override;
+	void collide_with(Door& other) override;
+	void collide_with(Player& other) override {};
+	void collide_with(Monster& other) override;
+	void collide_with(Projectile& other) override {};
 
 private:
+	
+
+
+
 	/*Les projectiles sont gérés par une pool d'instances:
 	* 10 projectiles sont instanciés lors de la création du personnage et sont mis dans inactiveProjectiles.
 	* A chaque tir, un projectile inactif est déplacé dans activeProjectile (et fait son rôle de projectile)

@@ -6,7 +6,7 @@ public:
 	explicit(false) MovingEntity(std::string const &label, sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction);
 	explicit(false) MovingEntity(pugi::xml_node node);
 
-	virtual void move(std::vector<std::unique_ptr<Entity>> const& entities);
+	virtual void move();
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 	std::string dump(std::string const& indent) const override;
 

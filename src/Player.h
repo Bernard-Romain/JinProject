@@ -51,6 +51,9 @@ private:
 	std::vector<std::unique_ptr<Projectile>> activeProjectiles;
 	std::vector<std::unique_ptr<Projectile>> inactiveProjectiles;
 
+	std::vector<Projectile*> toRemoveProjectiles;
+	void removeProjectile();
+
 	void handleCollision(Entity* const entity);
 
 	//Deux callbacks qui appelent des fonctions de Game, lors de la collision du player et lors de la collision entre un projectile et un monstre

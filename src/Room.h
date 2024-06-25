@@ -3,6 +3,9 @@
 #include <memory>
 #include "Entity.h"
 
+class Game;
+class Monster;
+
 /*Les rooms peuvent avoir trois états :
 * Undiscovered quand le joueur n'est jamais rentré dans la pièce
 * Active les monstres sont vivants
@@ -18,13 +21,13 @@ class Room
 {
 
 public:
-    explicit(false) Room(pugi::xml_node node);
+    explicit(false) Room(pugi::xml_node node, Game* game);
 
     void render(sf::RenderWindow* mWindow) const;
 
     void discover(); //Permet de changer l'état de la pièce lorsque l'on rentre dedans : s'il y a des monstres, la salle est Active, sinon Cleared
 
-    void killMonster(int i); //Appelée par Game lorsqu'un projectile rentre en collision avec un monstre .
+    void killMonster(Entity* monster); //Appelée par Game lorsqu'un projectile rentre en collision avec un monstre .
 
     std::string dump(std::string const& indent) const;
 

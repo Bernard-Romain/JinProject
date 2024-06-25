@@ -22,7 +22,7 @@ void Game::load()
 	for (auto child : doc.children())
 	{
 		if (child.name() == "Room"sv) {
-			rooms.push_back(make_unique<Room>(child));
+			rooms.push_back(make_unique<Room>(child,this));
 		}
 		if (child.name() == "Player"sv) {
 			player = make_unique<Player>(child);
@@ -53,7 +53,7 @@ void Game::onPlayerCollision(Entity* entity) {
 }
 
 void Game::kill(int i) {
-	currentRoom->get()->killMonster(i);
+	//currentRoom->get()->killMonster(i);
 	checkIfWin(); //La victoire ne peut avoir lieu qu'apres la mort d'un monstre, on vérifie donc ici si le jeu est gagné ou pas
 }
 
@@ -94,6 +94,7 @@ void Game::update()
 				collide(*entity, *player.get());
 			}
 		}
+		checkIfWin();
 	}
 }
 

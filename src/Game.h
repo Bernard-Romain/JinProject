@@ -26,6 +26,8 @@ public:
 		looseSound.play();
 	}
 
+	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
+
 
 private:
 	void	processEvents();
@@ -34,7 +36,7 @@ private:
 	void	update();
 	void	save() const; //TODO : A implémenter, sauvegarde du xml actuel dans un fichier.
 
-	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
+
 	void	setCallbacks(); //Initialise les callbacks 
 	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
 	void	initialiseSprites();

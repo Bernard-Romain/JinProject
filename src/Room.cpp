@@ -1,16 +1,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+#include <string>
+#include <cstdio>
 
 #include "Room.h"
 #include "Wall.h"
 #include "Player.h"
 #include "Monster.h"
 #include "Door.h"
+#include "Game.h"
 
 using namespace std;
 
-Room::Room(pugi::xml_node node)
+Room::Room(pugi::xml_node node, Game* game)
     : label { node.attribute("label").as_string() }
 {
     for (auto child : node.children())
@@ -20,14 +23,14 @@ Room::Room(pugi::xml_node node)
             entities.push_back(make_unique<Wall>(child));
         }
         if (child.name() == "Monster"sv) {
-            entities.push_back(make_unique<Monster>(child));
+            entities.push_back(make_unique<Monster>(child,this));
             monster++;
         }
         if (child.name() == "Player"sv) {
             entities.push_back(make_unique<Player>(child));
         }
         if (child.name() == "Door"sv) {
-            doors.push_back(make_unique<Door>(child));
+            doors.push_back(make_unique<Door>(child, game));
         }
     }    
 }
@@ -37,9 +40,18 @@ void Room::discover() {
     else clearRoom();
 }
 
-void Room::killMonster(int i) {
+void Room::killMonster(Entity* entity) {
     monster--;
-    entities.erase(entities.begin() + i);
+    auto it = std::find_if(entities.begin(), entities.end(),
+        [entity](const std::unique_ptr<Entity>& p) {
+            return p.get() == entity;
+        });
+    if (it != entities.end()) {
+        entities.erase(it);
+    }
+    else {
+        std::cerr << "Monster not found" << std::endl;
+    }
     if (monster == 0) clearRoom();
 }
 

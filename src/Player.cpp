@@ -73,26 +73,31 @@ void Player::render(sf::RenderWindow* mWindow) const {
     }
 }
 
-void Player::desactiveProjectile(Projectile* projectile) {/*
-    auto it = std::find_if(activeProjectiles.begin(), activeProjectiles.end(),
-        [projectile](const std::unique_ptr<Projectile>& p) {
-            return p.get() == projectile;
-        });
-    
-    if (it != activeProjectiles.end()) {
-        inactiveProjectiles.push_back(std::move(*it));
-        activeProjectiles.erase(it);
-        cout << "WE FINALLY GET THERE\n";
-    }
-    else {
-        cerr << "Projectile not found in activeProjectiles." << endl;
-    }*/
-    cout << "AAA\n"
+void Player::desactiveProjectile(Projectile* projectile) {
+    toRemoveProjectiles.push_back(projectile);
 }
 
-void collidee(Entity& first, Entity& second) {
+void Player::removeProjectile() {
+    for (auto projectile : toRemoveProjectiles) {
+        auto it = std::find_if(activeProjectiles.begin(), activeProjectiles.end(),
+            [projectile](const std::unique_ptr<Projectile>& p) {
+                return p.get() == projectile;
+            });
+
+        if (it != activeProjectiles.end()) {
+            inactiveProjectiles.push_back(std::move(*it));
+            activeProjectiles.erase(it);
+        }
+        else {
+            std::cerr << "Projectile not found in activeProjectiles." << std::endl;
+        }
+    }
+    toRemoveProjectiles.clear();
+}
+
+//TODO : faut faire quelque chose de ca, le décaler dans un header commun avec game, et surtout renommer le truc
+void collidee(Entity& first, Entity& second) { 
     first.collide_with(second);
-    second.collide_with(first);
 }
 
 void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
@@ -102,15 +107,15 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
     //Pour chaque projectile actif, on le fait bouger et on regarde ses collisions
     for (auto& projectile : activeProjectiles) {
         projectile->update(entities);
-        for (int i = 0; i < entities.size(); i++)
+        for (auto const& entity : entities)
         {
-            if (projectile->collide(*entities[i])) {
-                collidee(*projectile, *entities[i]);
+            if (projectile->collide(*entity)) {
+                collidee(*projectile, *entity);
                 break;
             }
         }
     }
-
+    removeProjectile();
 }
 
 void Player::handleCollision(Entity* const entity) {

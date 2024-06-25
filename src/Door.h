@@ -1,11 +1,9 @@
-#include "Entity.h"
+#pragma once
 #include "Room.h"
-
-class Game;
 
 class Door : public Entity {
 public:
-	explicit(false) Door(pugi::xml_node node);
+	explicit(false) Door(pugi::xml_node node, Game* game);
 
 	std::string getDestination() const { return destination; }
 	void setGame(Game* game) { this->game = game; };

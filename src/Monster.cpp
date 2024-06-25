@@ -12,13 +12,13 @@ Monster::Monster(pugi::xml_node node, Room* room, Player* player)
 {
     string stype = node.attribute("type").as_string();
     if (stype == "Fat")
-        type = Monster_Type::Fat;
+        context.set_strategy(std::make_unique<FatStrategy>());
     else if (stype == "Angry")
-        type = Monster_Type::Angry;
+        context.set_strategy(std::make_unique<AngryStrategy>());
     else if (stype == "Dumb")
-        type = Monster_Type::Dumb;
+        context.set_strategy(std::make_unique<DumbStrategy>());
     else if (stype == "Crazy")
-        type = Monster_Type::Crazy;
+        context.set_strategy(std::make_unique<CrazyStrategy>());
 
     isMovingLeft = true;
 
@@ -39,90 +39,12 @@ void Monster::collide_with(Projectile& other) {
 void Monster::move()
 {
     sf::Vector2f pposition = player->getPosition();
-    switch (type)
-    {
-    case(Monster_Type::Fat):
-        isMovingDown = false;
-        isMovingLeft = false;
-        isMovingRight = false;
-        isMovingUp = false;
-        break;
-    case(Monster_Type::Angry):
-        if (position.y < pposition.x)
-        {
-            isMovingUp = false;
-            isMovingDown = true;
-        }
-        if (position.y > pposition.y)
-        {
-            isMovingDown = false;
-            isMovingUp = true;
-        }
-        if (position.y == pposition.y)
-        {
-            isMovingDown = false;
-            isMovingUp = false;
-        }
-        if (position.x < pposition.x)
-        {
-            isMovingLeft = false;
-            isMovingRight = true;
-        }
-        if (position.x > pposition.x)
-        {
-            isMovingRight = false;
-            isMovingLeft = true;
-        }
-        if (position.x == pposition.x)
-        {
-            isMovingRight = false;
-            isMovingLeft = false;
-        }
-        break;
-    case(Monster_Type::Dumb):
-        if (position.y < 200 && position.x > 500)
-        {
-            isMovingUp = false;
-            isMovingLeft = true;
-        }
-        if (position.y > 700 && position.x < 500)
-        {
-            isMovingDown = false;
-            isMovingRight = true;
-        }
-        if (position.x < 200 && position.y < 500)
-        {
-            isMovingLeft = false;
-            isMovingDown = true;
-        }
-        if (position.x > 1600 && position.y > 500)
-        {
-            isMovingRight = false;
-            isMovingUp = true;
-        }
-        break;
-    case(Monster_Type::Crazy):
-        int dir = rand() % 4;
-        switch (dir)
-        {
-        case(0):
-            isMovingUp = true;
-            isMovingDown = false;
-            break;
-        case(1):
-            isMovingDown = true;
-            isMovingUp = false;
-            break;
-        case(2):
-            isMovingRight = true;
-            isMovingLeft = false;
-            break;
-        case(3):
-            isMovingLeft = true;
-            isMovingRight = false;
-            break;
-        }
-    }
+
+    bool* next = context.calculateDirection(position, pposition);
+    isMovingUp = next[0];
+    isMovingRight = next[1];
+    isMovingDown = next[2];
+    isMovingLeft = next[3];
 
     lastPosition = position;
 

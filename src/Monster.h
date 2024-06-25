@@ -1,21 +1,11 @@
 #pragma once
 #include "LivingEntity.h"
+#include "MovingStrategy.h"
 
 class Room;
 class Player;
+class Context;
 
-/*Les monstres peuvent être de pluiseur type :
-* Le Fat ne bouge pas
-* Le Angry suit le joueur
-* Le Crazy se déplace de manière aléatoire
-* Le Dumb fait une ronde dans la pièce
-*/
-enum class Monster_Type {
-	Fat,
-	Angry,
-	Crazy,
-	Dumb
-};
 
 class Monster : public LivingEntity {
 public:
@@ -37,5 +27,5 @@ public:
 private :
 	Room* room;
 	Player* player;
-	Monster_Type type;
+	Context context;
 };

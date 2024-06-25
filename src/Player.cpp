@@ -149,8 +149,8 @@ void Player::collide_with(Wall& other) {
 }
 
 void Player::collide_with(Door& other) {
-    lastPosition = sf::Vector2f(1000, 500);
-    sprite.setPosition(lastPosition);
+    position = sf::Vector2f(1000, 500);
+    sprite.setPosition(position);
 }
 
 void Player::collide_with(Monster& other) {

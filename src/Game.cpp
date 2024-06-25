@@ -22,7 +22,7 @@ void Game::load()
 	for (auto child : doc.children())
 	{
 		if (child.name() == "Room"sv) {
-			rooms.push_back(make_unique<Room>(child,this));
+			rooms.push_back(make_unique<Room>(child,this, player.get()));
 		}
 		if (child.name() == "Player"sv) {
 			player = make_unique<Player>(child);
@@ -89,6 +89,13 @@ void Game::update()
 		player->update(currentRoom->get()->entities);
 
 		for (auto& entity : currentRoom->get()->entities) {
+			entity.get()->update(currentRoom->get()->entities);
+			for (auto& entity2 : currentRoom->get()->entities) {
+				if (entity2.get()->collide(*entity)) {
+					collide(*entity, *entity2);
+					collide(*entity2, *entity);
+				}
+			}
 			if (entity.get()->collide(*player.get())) {
 				collide(*player.get(), *entity);
 				collide(*entity, *player.get());

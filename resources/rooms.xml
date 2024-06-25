@@ -1,4 +1,5 @@
 <?xml version = "1.0"?>
+<Player x="1000" y="500" sprite="Player" speed="20" hp="3"/>
 <Room label="PremiereRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>
 	<Wall x="0" y="0" x_size="80" y_size="2000" sprite="Wall"/>
@@ -6,7 +7,7 @@
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="1720" y="400" sprite="Door" destination="DeuxiemeRoom"/>
 	<Door x ="-50" y="400" sprite="Door" destination="TroisiemeRoom"/>
-	<Monster x="1000" y="200" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="200" sprite="FatEnemy" speed="0" hp="3" type="Fat"/>
 </Room>
 <Room label="DeuxiemeRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>
@@ -14,9 +15,9 @@
 	<Wall x="1840" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="-50" y="400" sprite="Door" destination="PremiereRoom"/>
-	<Monster x="500" y="200" sprite="FatEnemy" speed="20" hp="3"/>
-	<Monster x="1000" y="200" sprite="FatEnemy" speed="20" hp="3"/>
-	<Monster x="1500" y="200" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="500" y="200" sprite="DumbEnemy" speed="10" hp="3" type="Dumb"/>
+	<Monster x="1000" y="200" sprite="CrazyEnemy" speed="10" hp="3" type="Crazy"/>
+	<Monster x="1500" y="200" sprite="DumbEnemy" speed="10" hp="3" type="Dumb"/>
 </Room>
 <Room label="TroisiemeRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>
@@ -24,7 +25,6 @@
 	<Wall x="1840" y="0" x_size="80" y_size="2000" sprite="Wall"/>
 	<Wall x="0" y="980" x_size="2000" y_size="80" sprite="Wall"/>
 	<Door x ="1720" y="400" sprite="Door" destination="PremiereRoom"/>
-	<Monster x="1000" y="200" sprite="FatEnemy" speed="20" hp="3"/>
-	<Monster x="1000" y="700" sprite="FatEnemy" speed="20" hp="3"/>
+	<Monster x="1000" y="200" sprite="AngryEnemy" speed="5" hp="3" type="Angry"/>
+	<Monster x="1000" y="700" sprite="AngryEnemy" speed="5" hp="3" type="Angry"/>
 </Room>
-<Player x="1000" y="500" sprite="Player" speed="20" hp="3"/>

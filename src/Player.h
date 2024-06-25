@@ -38,6 +38,8 @@ public:
 	void collide_with(Monster& other) override;
 	void collide_with(Projectile& other) override {};
 
+	sf::Vector2f getPosition() const { return position; };
+
 private:
 	
 

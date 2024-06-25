@@ -7,7 +7,7 @@ public:
 	explicit(false) MovingEntity(pugi::xml_node node);
 
 	virtual void move();
-	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
+	virtual void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 	std::string dump(std::string const& indent) const override;
 
 

@@ -21,7 +21,7 @@ class Room
 {
 
 public:
-    explicit(false) Room(pugi::xml_node node, Game* game);
+    explicit(false) Room(pugi::xml_node node, Game* game, Player* player);
 
     void render(sf::RenderWindow* mWindow) const;
 

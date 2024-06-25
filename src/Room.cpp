@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Room::Room(pugi::xml_node node, Game* game)
+Room::Room(pugi::xml_node node, Game* game, Player* player)
     : label { node.attribute("label").as_string() }
 {
     for (auto child : node.children())
@@ -23,7 +23,7 @@ Room::Room(pugi::xml_node node, Game* game)
             entities.push_back(make_unique<Wall>(child));
         }
         if (child.name() == "Monster"sv) {
-            entities.push_back(make_unique<Monster>(child,this));
+            entities.push_back(make_unique<Monster>(child,this, player));
             monster++;
         }
         if (child.name() == "Player"sv) {

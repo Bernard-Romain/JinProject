@@ -58,6 +58,11 @@ void Monster::move()
             isMovingDown = false;
             isMovingUp = true;
         }
+        if (position.y == pposition.y)
+        {
+            isMovingDown = false;
+            isMovingUp = false;
+        }
         if (position.x < pposition.x)
         {
             isMovingLeft = false;
@@ -67,6 +72,11 @@ void Monster::move()
         {
             isMovingRight = false;
             isMovingLeft = true;
+        }
+        if (position.x == pposition.x)
+        {
+            isMovingRight = false;
+            isMovingLeft = false;
         }
         break;
     case(Monster_Type::Dumb):

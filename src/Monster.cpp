@@ -39,12 +39,11 @@ void Monster::collide_with(Projectile& other) {
 void Monster::move()
 {
     sf::Vector2f pposition = player->getPosition();
-
-    bool* next = context.calculateDirection(position, pposition);
-    isMovingUp = next[0];
-    isMovingRight = next[1];
-    isMovingDown = next[2];
-    isMovingLeft = next[3];
+    struct res result = context.calculateDirection(position, pposition);
+    isMovingUp = result.dir[0];
+    isMovingRight = result.dir[1];
+    isMovingDown = result.dir[2];
+    isMovingLeft = result.dir[3];
 
     lastPosition = position;
 

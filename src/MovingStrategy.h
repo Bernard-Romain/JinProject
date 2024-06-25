@@ -3,11 +3,16 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
+struct res
+{
+    bool dir[4];
+};
+
 class MovingStrategy
 {
 public:
     virtual ~MovingStrategy() = default;
-    virtual bool* nextPosition(sf::Vector2f position, sf::Vector2f pposition) const = 0;
+    virtual struct res nextPosition(sf::Vector2f position, sf::Vector2f pposition) const = 0;
 };
 
 class Context
@@ -20,26 +25,26 @@ public:
 
     void set_strategy(std::unique_ptr<MovingStrategy>&& strategy);
 
-    bool* calculateDirection(sf::Vector2f position, sf::Vector2f pposition) const;
+    struct res calculateDirection(sf::Vector2f position, sf::Vector2f pposition) const;
 };
 
 class FatStrategy : public MovingStrategy
 {
 public:
-    bool* nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
+    struct res nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
 };
 class AngryStrategy : public MovingStrategy
 {
 public:
-    bool* nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
+    struct res nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
 };
 class DumbStrategy : public MovingStrategy
 {
 public:
-    bool* nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
+    struct res nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
 };
 class CrazyStrategy : public MovingStrategy
 {
 public:
-    bool* nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
+    struct res nextPosition(sf::Vector2f position, sf::Vector2f pposition) const override;
 };

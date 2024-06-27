@@ -1,4 +1,4 @@
-<?xml version = "1.0"?>
+	<?xml version = "1.0"?>
 <Player x="1000" y="500" sprite="Player" speed="20" hp="3"/>
 <Room label="PremiereRoom" >
 	<Wall x="0" y="0" x_size="2000" y_size="80" sprite="Wall"/>

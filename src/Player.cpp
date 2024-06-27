@@ -16,10 +16,6 @@ Player::Player(pugi::xml_node node)
     }
 }
 
-void Player::updatePositionWhenChangingRoom() {
-
-}
-
 std::string Player::dump(std::string const& indent) const {
 
     ostringstream oss;
@@ -118,13 +114,6 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
     removeProjectile();
 }
 
-void Player::handleCollision(Entity* const entity) {
-    if ((entity->getLabel() == "Monster"sv) || (entity->getLabel() == "Door"sv)) {
-        updatePositionWhenChangingRoom();
-        (callbackInstance->*collisionCallback)(entity);
-    }
-}
-
 void Player::move()
 {
     lastPosition = position;
@@ -154,5 +143,5 @@ void Player::collide_with(Door& other) {
 }
 
 void Player::collide_with(Monster& other) {
-    callbackInstance->triggerLoose();
+    gameInstance->triggerLoose();
 }

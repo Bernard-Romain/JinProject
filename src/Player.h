@@ -16,13 +16,7 @@ public:
 	void render(sf::RenderWindow* mWindow) const override;
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 
-	using CollisionCallback = void (Game::*)(Entity*);
-	using KillCallback = void (Game::*)(int);
-
-	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
-	void setKillCallback(Game* instance, KillCallback callback) { callbackInstance = instance; killCallback = callback; }
-
-	void updatePositionWhenChangingRoom(); 
+	void setGameInstance(Game* instance) { gameInstance = instance; }
 
 	void move() override;
 	void desactiveProjectile(Projectile* projectile);
@@ -41,9 +35,6 @@ public:
 	sf::Vector2f getPosition() const { return position; };
 
 private:
-	
-
-
 
 	/*Les projectiles sont gérés par une pool d'instances:
 	* 10 projectiles sont instanciés lors de la création du personnage et sont mis dans inactiveProjectiles.
@@ -56,10 +47,5 @@ private:
 	std::vector<Projectile*> toRemoveProjectiles;
 	void removeProjectile();
 
-	void handleCollision(Entity* const entity);
-
-	//Deux callbacks qui appelent des fonctions de Game, lors de la collision du player et lors de la collision entre un projectile et un monstre
-	CollisionCallback collisionCallback = nullptr;
-	KillCallback killCallback = nullptr;
-	Game* callbackInstance = nullptr;
+	Game* gameInstance = nullptr;
 };

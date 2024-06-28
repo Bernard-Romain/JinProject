@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include <sstream>
+#include <iostream>
 #include "Room.h"
 #include "Player.h"
 
@@ -39,26 +40,9 @@ void Monster::collide_with(Projectile& other) {
 void Monster::move()
 {
     sf::Vector2f pposition = player->getPosition();
-    struct res result = context.calculateDirection(position, pposition);
-    isMovingUp = result.dir[0];
-    isMovingRight = result.dir[1];
-    isMovingDown = result.dir[2];
-    isMovingLeft = result.dir[3];
-
     lastPosition = position;
-
-    direction = sf::Vector2f();
-    if (isMovingUp)
-        direction += sf::Vector2f(0, -1);
-    if (isMovingDown)
-        direction += sf::Vector2f(0, 1);
-    if (isMovingLeft)
-        direction += sf::Vector2f(-1, 0);
-    if (isMovingRight)
-        direction += sf::Vector2f(1, 0);
-
-    position += direction * speed;
-    sprite.setPosition(position);
+    position += context.updatePosition(position, pposition, speed);
+    cout << "This monster : LastPosition : " << lastPosition.x << "," << lastPosition.y << "and now " << position.x << endl;
 }
 
 void Monster::update(std::vector<std::unique_ptr<Entity>> const& entities)

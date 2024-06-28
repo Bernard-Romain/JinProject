@@ -1,129 +1,67 @@
 #include "MovingStrategy.h"
 
-Context::Context(std::unique_ptr<MovingStrategy>&& strategy) : strategy_(std::move(strategy))
-{
-}
+using namespace std;
+
+Context::Context(std::unique_ptr<MovingStrategy>&& strategy) 
+    : strategy{std::move(strategy)}
+{}
 
 void Context::set_strategy(std::unique_ptr<MovingStrategy>&& strategy)
 {
-    strategy_ = std::move(strategy);
+    this->strategy = std::move(strategy);
 }
 
-struct res Context::calculateDirection(sf::Vector2f position, sf::Vector2f pposition) const
+sf::Vector2f Context::updatePosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    struct res result;
-    if (strategy_) {
-        result = strategy_->nextPosition(position, pposition);
-    }
-    return result;
+    return strategy->nextPosition(position, pposition, speed);
 }
 
-struct res FatStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition) const
+sf::Vector2f FatStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    struct res result;
-    result.dir[0] = false;
-    result.dir[1] = false;
-    result.dir[2] = false;
-    result.dir[3] = false;
-
-    return result;
+    return sf::Vector2f();
 }
 
-struct res AngryStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition) const
+sf::Vector2f AngryStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    struct res result;
-    if (position.y < pposition.x)
-    {
-        result.dir[0] = false;
-        result.dir[2] = true;
-    }
-    if (position.y > pposition.y)
-    {
-        result.dir[2] = false;
-        result.dir[0] = true;
-    }
-    if (position.y == pposition.y)
-    {
-        result.dir[2] = false;
-        result.dir[0] = false;
-    }
-    if (position.x < pposition.x)
-    {
-        result.dir[3] = false;
-        result.dir[1] = true;
-    }
-    if (position.x > pposition.x)
-    {
-        result.dir[1] = false;
-        result.dir[3] = true;
-    }
-    if (position.x == pposition.x)
-    {
-        result.dir[1] = false;
-        result.dir[3] = false;
-    }
+    cout << "aaaaaah\n";
+    sf::Vector2f direction = pposition - position;
+    float length = sqrt(direction.x * direction.x + direction.y * direction.y);
 
-    return result;
+    if (length != 0) direction = sf::Vector2f(direction.x / length, direction.y / length);
+
+    return direction * speed;
 }
 
-struct res DumbStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition) const
+sf::Vector2f DumbStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    struct res result;
+    sf::Vector2f direction;
     if (position.y <= 300 && position.x >= 200)
-    {
-        result.dir[3] = true;
-        result.dir[1] = false;
-        result.dir[2] = false;
-        result.dir[0] = false;
-    }
+        direction = { -1,0 };
     if (position.y >= 700 && position.x <= 1600)
-    {
-        result.dir[1] = true;
-        result.dir[3] = false;
-        result.dir[2] = false;
-        result.dir[0] = false;
-    }
+        direction = { 1,0 };
     if (position.x <= 200 && position.y <= 700)
-    {
-        result.dir[2] = true;
-        result.dir[1] = false;
-        result.dir[3] = false;
-        result.dir[0] = false;
-    }
+        direction = { 0,1 };
     if (position.x >= 1600 && position.y >= 300)
-    {
-        result.dir[0] = true;
-        result.dir[1] = false;
-        result.dir[2] = false;
-        result.dir[3] = false;
-    }
+        direction = { 0,-1 };
 
-    return result;
+    return direction * speed;
 }
 
-struct res CrazyStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition) const
+sf::Vector2f CrazyStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    struct res result;
+    sf::Vector2f direction;
     int dir = rand() % 4;
     switch (dir)
     {
     case(0):
-        result.dir[0] = true;
-        result.dir[2] = false;
-        break;
+        direction = { 1,0 };
     case(1):
-        result.dir[2] = true;
-        result.dir[0] = false;
-        break;
+        direction = { -1,0 };
     case(2):
-        result.dir[1] = true;
-        result.dir[3] = false;
-        break;
+        direction = { 0,1 };
     case(3):
-        result.dir[3] = true;
-        result.dir[1] = false;
-        break;
+        direction = { 0,-1 };
     }
 
-    return result;
+    return direction * speed;
 }

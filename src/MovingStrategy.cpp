@@ -23,7 +23,6 @@ sf::Vector2f FatStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposi
 
 sf::Vector2f AngryStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    cout << "aaaaaah\n";
     sf::Vector2f direction = pposition - position;
     float length = sqrt(direction.x * direction.x + direction.y * direction.y);
 
@@ -55,12 +54,16 @@ sf::Vector2f CrazyStrategy::nextPosition(sf::Vector2f position, sf::Vector2f ppo
     {
     case(0):
         direction = { 1,0 };
+        break;
     case(1):
         direction = { -1,0 };
+        break;
     case(2):
         direction = { 0,1 };
+        break;
     case(3):
         direction = { 0,-1 };
+        break;
     }
 
     return direction * speed;

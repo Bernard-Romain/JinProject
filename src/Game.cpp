@@ -40,21 +40,9 @@ void Game::load()
 	initialiseSprites();
 }
 
-void Game::onPlayerCollision(Entity* entity) {
-	if (entity->getLabel() == "Monster"sv) {
-		loose = true;
-		looseSound.play();
-	}
-	if (entity->getLabel() == "Door"sv) {
-		if (auto door = dynamic_cast<Door*>(entity)) { //On double-vérife le type de l'entité, à travers son label et un dynamic_cast
-			handleCollisionPlayerDoor(door);
-		}
-	}
-}
-
-void Game::kill(int i) {
-	//currentRoom->get()->killMonster(i);
-	checkIfWin(); //La victoire ne peut avoir lieu qu'apres la mort d'un monstre, on vérifie donc ici si le jeu est gagné ou pas
+void Game::triggerLoose() {
+	loose = true;
+	looseSound.play();
 }
 
 void Game::checkIfWin() {
@@ -167,14 +155,11 @@ void Game::setCallbacks() {
 
 void Game::handleCollisionPlayerDoor(const Door* door) {
 	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
-		cout << (*it)->getLabel() << " == " << door->getDestination() << " : ";
 		if ((*it)->getLabel() == door->getDestination()) {
 			currentRoom = it;
-			std::cout << "Switched to room: " << door->getDestination() << std::endl;
 			if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
 			return;
 		}
-		else { cout << "false !\n"; }
 	}
 }
 

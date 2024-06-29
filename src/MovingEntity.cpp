@@ -4,8 +4,8 @@
 
 using namespace std;
 
-MovingEntity::MovingEntity(std::string const& label, sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction)
-	: Entity(label, position, spriteLabel)
+MovingEntity::MovingEntity(sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction)
+	: Entity(position, spriteLabel)
 	, speed { speed }
 	, direction{ direction }
 {}

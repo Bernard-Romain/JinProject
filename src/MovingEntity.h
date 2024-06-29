@@ -3,7 +3,7 @@
 
 class MovingEntity : public Entity {
 public:
-	explicit(false) MovingEntity(std::string const &label, sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction);
+	explicit(false) MovingEntity(sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction);
 	explicit(false) MovingEntity(pugi::xml_node node);
 
 	virtual void move();

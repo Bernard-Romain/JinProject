@@ -5,7 +5,7 @@
 using namespace std;
 
 Projectile::Projectile(sf::Vector2f position, std::string const& spriteLabel, float speed, sf::Vector2f direction, int damage, Player* player) 
-	: MovingEntity("Projectile", position, spriteLabel, speed, direction)
+	: MovingEntity(position, spriteLabel, speed, direction)
 	, damage { damage }
 	, player { player }
 {}

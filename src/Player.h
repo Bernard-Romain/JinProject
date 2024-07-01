@@ -7,7 +7,7 @@ class Game;
 class Player : public LivingEntity {
 
 public:
-	explicit(false) Player(pugi::xml_node node);
+	explicit(false) Player(pugi::xml_node node, Game* game);
 
 	std::string dump(std::string const& indent) const override;
 	void manageInput(sf::Keyboard::Key input, bool active); //Appelé lorsque l'on appuie sur une touche du clavier
@@ -15,8 +15,6 @@ public:
 
 	void render(sf::RenderWindow* mWindow) const override;
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
-
-	void setGameInstance(Game* instance) { gameInstance = instance; }
 
 	void move() override;
 	void desactiveProjectile(Projectile* projectile);
@@ -47,5 +45,5 @@ private:
 	std::vector<Projectile*> toRemoveProjectiles;
 	void removeProjectile();
 
-	Game* gameInstance = nullptr;
+	Game* game;
 };

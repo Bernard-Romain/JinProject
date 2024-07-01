@@ -3,6 +3,7 @@
 #include <sstream>
 #include <string>
 #include <cstdio>
+#include <pugixml.hpp>
 
 #include "Room.h"
 #include "Wall.h"
@@ -17,28 +18,31 @@ Room::Room(pugi::xml_node node, Game* game)
     : label { node.attribute("label").as_string() }
     , game { game }
 {
+    static const std::string_view wallStr = "Wall";
+    static const std::string_view monsterStr = "Monster";
+    static const std::string_view doorStr = "Door";
+
     for (auto child : node.children())
     {
-        assert((child.name() == "Wall"sv) || (child.name() == "Monster"sv) || (child.name() == "Player"sv) || (child.name() == "Door"sv));
-        if (child.name() == "Wall"sv) {
+        std::string_view childName = child.name();
+        assert((childName == wallStr) || (childName == monsterStr) || (childName == doorStr));
+        
+        if (childName == wallStr) {
             entities.push_back(make_unique<Wall>(child));
-        }
-        if (child.name() == "Monster"sv) {
-            entities.push_back(make_unique<Monster>(child,this));
+        } else if (childName == monsterStr) {
+            entities.push_back(make_unique<Monster>(child, this));
             monster++;
-        }
-        if (child.name() == "Player"sv) {
-            entities.push_back(make_unique<Player>(child));
-        }
-        if (child.name() == "Door"sv) {
+        } else if (childName == doorStr) {
             doors.push_back(make_unique<Door>(child, this));
         }
     }    
 }
 
-void Room::discover() {
-    if (monster > 0) state = Room_State::Active;
-    else clearRoom();
+void Room::enterRoom() {
+    if (state == Room_State::Undiscovered) {
+        if (monster > 0) state = Room_State::Active;
+        else clearRoom();
+    }
 }
 
 void Room::killMonster(Entity* entity) {
@@ -58,6 +62,7 @@ void Room::killMonster(Entity* entity) {
 
 void Room::clearRoom() {
     state = Room_State::Cleared;
+    game->checkIfWin();
     for (auto& door : doors) { 
         entities.push_back(move(door)); //Lorsque la room est Cleared, on met les portes dans entities, pour qu'elles soient affichées
     }

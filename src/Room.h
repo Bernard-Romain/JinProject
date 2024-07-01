@@ -1,6 +1,9 @@
 #pragma once
 #include <vector>
 #include <memory>
+#include <string_view>
+#include <cassert>
+
 #include "Entity.h"
 
 class Game;
@@ -25,7 +28,7 @@ public:
 
     void render(sf::RenderWindow* mWindow) const;
 
-    void discover(); //Permet de changer l'état de la pièce lorsque l'on rentre dedans : s'il y a des monstres, la salle est Active, sinon Cleared
+    void enterRoom(); //Permet de changer l'état de la pièce lorsque l'on rentre dedans : s'il y a des monstres, la salle est Active, sinon Cleared
 
     void killMonster(Entity* monster); //Appelée par Game lorsqu'un projectile rentre en collision avec un monstre .
 

@@ -7,7 +7,6 @@ Door::Door(pugi::xml_node node, Room* room)
 	, room(room)
 {}
 
-//TODO : changer le type de ce qui est passé, peut etre mme la logique derriere
 void Door::collide_with(Player& other) {
-	room->getGame()->handleCollisionPlayerDoor(this);
+	room->getGame()->changeRoom(destination);
 }

@@ -25,14 +25,12 @@ void Game::load()
 			rooms.push_back(make_unique<Room>(child,this));
 		}
 		if (child.name() == "Player"sv) {
-			player = make_unique<Player>(child);
+			player = make_unique<Player>(child,this);
 		}
 	}
 
 	currentRoom = rooms.begin();
-	(*currentRoom)->discover(); //Discover permet de dire que l'on découvre la room, changeant son statut suivant les monstres dedans
-
-	setCallbacks();
+	(*currentRoom)->enterRoom(); //Discover permet de dire que l'on découvre la room, changeant son statut suivant les monstres dedans
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
@@ -89,7 +87,6 @@ void Game::update()
 				collide(*entity, *player.get());
 			}
 		}
-		checkIfWin();
 	}
 }
 
@@ -149,16 +146,12 @@ void Game::run()
 	}
 }
 
-void Game::setCallbacks() {
-	player->setGameInstance(this);
-}
-
-void Game::handleCollisionPlayerDoor(const Door* door) {
+void Game::changeRoom(const string &destination) {
 	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
-		if ((*it)->getLabel() == door->getDestination()) {
+		if ((*it)->getLabel() == destination) {
 			currentRoom = it;
-			if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
-			return;
+			(*it)->enterRoom();
+			break;
 		}
 	}
 }

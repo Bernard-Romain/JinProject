@@ -6,8 +6,9 @@
 
 using namespace std;
 
-Player::Player(pugi::xml_node node)
+Player::Player(pugi::xml_node node, Game* game)
     : LivingEntity(node)
+    , game(game)
 {
     sprite.setScale(sf::Vector2f(0.6f, 0.6f));
 
@@ -143,5 +144,5 @@ void Player::collide_with(Door& other) {
 }
 
 void Player::collide_with(Monster& other) {
-    gameInstance->triggerLoose();
+    game->triggerLoose();
 }

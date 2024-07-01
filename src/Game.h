@@ -21,7 +21,7 @@ public:
 
 	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
 
-	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
+	void	changeRoom(const std::string &destination); //Gère la collision entre le joueur et une porte
 	Player* getPlayer() const { return player.get(); }
 
 
@@ -32,8 +32,6 @@ private:
 	void	update();
 	void	save() const; //TODO : A implémenter, sauvegarde du xml actuel dans un fichier.
 
-
-	void	setCallbacks(); //Initialise les callbacks 
 	void	initialiseSprites();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};

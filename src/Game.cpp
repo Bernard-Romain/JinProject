@@ -22,7 +22,7 @@ void Game::load()
 	for (auto child : doc.children())
 	{
 		if (child.name() == "Room"sv) {
-			rooms.push_back(make_unique<Room>(child,this, player.get()));
+			rooms.push_back(make_unique<Room>(child,this));
 		}
 		if (child.name() == "Player"sv) {
 			player = make_unique<Player>(child);

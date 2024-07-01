@@ -17,21 +17,7 @@ MovingEntity::MovingEntity(pugi::xml_node node)
 
 void MovingEntity::move()
 {
-	//TODO : doublon avec le player
-	lastPosition = position;
-
-	direction = sf::Vector2f(0, 0);
-	if (isMovingUp)
-		direction += sf::Vector2f(0, -1);
-	if (isMovingDown)
-		direction += sf::Vector2f(0, 1);
-	if (isMovingLeft)
-		direction += sf::Vector2f(-1, 0);
-	if (isMovingRight)
-		direction += sf::Vector2f(1, 0);
-
-	position += direction * speed;
-	sprite.setPosition(position);
+	//TODO : a voir comment on fait, est ce qu'on vire ca et on met pas tout dans movvingStrategy
 }
 
 std::string MovingEntity::dump(std::string const& indent) const {

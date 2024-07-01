@@ -21,7 +21,7 @@ class Room
 {
 
 public:
-    explicit(false) Room(pugi::xml_node node, Game* game, Player* player);
+    explicit(false) Room(pugi::xml_node node, Game* game);
 
     void render(sf::RenderWindow* mWindow) const;
 
@@ -37,9 +37,11 @@ public:
 
     std::string getLabel() const { return label; }
     Room_State getState() const { return state; }
+    Game* getGame() const { return game; }
 
 private:
     std::string label;
+    Game* game;
     Room_State state = Room_State::Undiscovered;
     int monster = 0; //Retient le nombre de monstres dans la pièce pour gérer son statut (incrémenté lors de l'initialisation, décrémenté lors de la mort du monstre)
 

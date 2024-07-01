@@ -22,6 +22,7 @@ public:
 	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
 
 	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
+	Player* getPlayer() const { return player.get(); }
 
 
 private:

@@ -9,7 +9,7 @@ class Context;
 
 class Monster : public LivingEntity {
 public:
-	explicit(false) Monster(pugi::xml_node node, Room* room, Player* player);
+	explicit(false) Monster(pugi::xml_node node, Room* room);
 	std::string dump(std::string const& indent) const override;
 	void move() override;
 	void update(std::vector<std::unique_ptr<Entity>> const& entities) override;
@@ -26,6 +26,5 @@ public:
 	void collide_with(Projectile& other) override;
 private :
 	Room* room;
-	Player* player;
 	Context context;
 };

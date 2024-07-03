@@ -79,7 +79,6 @@ void Game::update()
 			for (auto& entity2 : currentRoom->get()->entities) {
 				if (entity2.get()->collide(*entity)) {
 					collide(*entity, *entity2);
-					collide(*entity2, *entity);
 				}
 			}
 			if (entity.get()->collide(*player.get())) {

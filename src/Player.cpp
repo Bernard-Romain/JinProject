@@ -92,8 +92,7 @@ void Player::removeProjectile() {
     toRemoveProjectiles.clear();
 }
 
-//TODO : faut faire quelque chose de ca, le décaler dans un header commun avec game, et surtout renommer le truc
-void collidee(Entity& first, Entity& second) { 
+void collideWith(Entity& first, Entity& second) { 
     first.collide_with(second);
 }
 
@@ -107,7 +106,7 @@ void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
         for (auto const& entity : entities)
         {
             if (projectile->collide(*entity)) {
-                collidee(*projectile, *entity);
+                collideWith(*projectile, *entity);
                 break;
             }
         }

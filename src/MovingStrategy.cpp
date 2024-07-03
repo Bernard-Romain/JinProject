@@ -48,23 +48,14 @@ sf::Vector2f DumbStrategy::nextPosition(sf::Vector2f position, sf::Vector2f ppos
 
 sf::Vector2f CrazyStrategy::nextPosition(sf::Vector2f position, sf::Vector2f pposition, float speed) const
 {
-    sf::Vector2f direction;
-    int dir = rand() % 4;
-    switch (dir)
-    {
-    case(0):
-        direction = { 1,0 };
-        break;
-    case(1):
-        direction = { -1,0 };
-        break;
-    case(2):
-        direction = { 0,1 };
-        break;
-    case(3):
-        direction = { 0,-1 };
-        break;
-    }
+    float speedX = (rand() % 200 - 80) / 20;
+    float speedY = (rand() % 200 - 80) / 20;
 
-    return direction * speed;
+    sf::Vector2f direction = pposition - position;
+    float length = sqrt(direction.x * direction.x + direction.y * direction.y);
+
+    if (length != 0) direction = sf::Vector2f(direction.x / length, direction.y / length);
+    auto speedRandom = sf::Vector2f(speedX, speedY);
+
+    return sf::Vector2f(direction.x * speedRandom.x * speed, direction.y * speedRandom.y * speed);
 }

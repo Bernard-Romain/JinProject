@@ -22,17 +22,15 @@ void Game::load()
 	for (auto child : doc.children())
 	{
 		if (child.name() == "Room"sv) {
-			rooms.push_back(make_unique<Room>(child));
+			rooms.push_back(make_unique<Room>(child,this));
 		}
 		if (child.name() == "Player"sv) {
-			player = make_unique<Player>(child);
+			player = make_unique<Player>(child,this);
 		}
 	}
 
 	currentRoom = rooms.begin();
-	(*currentRoom)->discover(); //Discover permet de dire que l'on découvre la room, changeant son statut suivant les monstres dedans
-
-	setCallbacks();
+	(*currentRoom)->enterRoom(); //Discover permet de dire que l'on découvre la room, changeant son statut suivant les monstres dedans
 
 	cout << currentRoom->get()->dump("");
 	cout << player->dump("");
@@ -40,21 +38,9 @@ void Game::load()
 	initialiseSprites();
 }
 
-void Game::onPlayerCollision(Entity* entity) {
-	if (entity->getLabel() == "Monster"sv) {
-		loose = true;
-		looseSound.play();
-	}
-	if (entity->getLabel() == "Door"sv) {
-		if (auto door = dynamic_cast<Door*>(entity)) { //On double-vérife le type de l'entité, à travers son label et un dynamic_cast
-			handleCollisionPlayerDoor(door);
-		}
-	}
-}
-
-void Game::kill(int i) {
-	currentRoom->get()->killMonster(i);
-	checkIfWin(); //La victoire ne peut avoir lieu qu'apres la mort d'un monstre, on vérifie donc ici si le jeu est gagné ou pas
+void Game::triggerLoose() {
+	loose = true;
+	looseSound.play();
 }
 
 void Game::checkIfWin() {
@@ -78,9 +64,30 @@ void Game::render()
 	mWindow.display();
 }
 
+void collide(Entity& first, Entity& second) {
+	first.collide_with(second);
+}
+
 void Game::update()
 {
-	if (!(win || loose)) player->update(currentRoom->get()->entities);
+	if (!(win || loose)) //TODO :le changer de place, peut etre ne plus rentrer dans cette boucle quand c'est gagné
+	{
+		player->update(currentRoom->get()->entities);
+
+		for (auto& entity : currentRoom->get()->entities) {
+			entity.get()->update(currentRoom->get()->entities);
+			for (auto& entity2 : currentRoom->get()->entities) {
+				if (entity2.get()->collide(*entity)) {
+					collide(*entity, *entity2);
+					collide(*entity2, *entity);
+				}
+			}
+			if (entity.get()->collide(*player.get())) {
+				collide(*player.get(), *entity);
+				collide(*entity, *player.get());
+			}
+		}
+	}
 }
 
 void Game::save () const
@@ -139,22 +146,13 @@ void Game::run()
 	}
 }
 
-void Game::setCallbacks() {
-	player->setCollisionCallback(this, &Game::onPlayerCollision);
-	player->setKillCallback(this, &Game::kill);
-}
-
-void Game::handleCollisionPlayerDoor(const Door* door) {
+void Game::changeRoom(const string &destination) {
 	for (auto it = rooms.begin(); it != rooms.end(); ++it) {
-		cout << (*it)->getLabel() << " == " << door->getDestination() << " : ";
-		if ((*it)->getLabel() == door->getDestination()) {
+		if ((*it)->getLabel() == destination) {
 			currentRoom = it;
-			std::cout << "Switched to room: " << door->getDestination() << std::endl;
-			if ((*it)->getState() == Room_State::Undiscovered) (*it)->discover();
-			player->updatePositionWhenChangingRoom();
-			return;
+			(*it)->enterRoom();
+			break;
 		}
-		else { cout << "false !\n"; }
 	}
 }
 

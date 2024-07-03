@@ -4,9 +4,8 @@
 
 using namespace std;
 
-Entity::Entity(std::string const &label, sf::Vector2f const &position, string const &spriteLabel) 
-	: label { label }
-	, position { position }
+Entity::Entity(sf::Vector2f const &position, string const &spriteLabel) 
+	: position { position }
 {
 	texture.loadFromFile("resources/sprites/" + spriteLabel + ".png");
 
@@ -17,8 +16,7 @@ Entity::Entity(std::string const &label, sf::Vector2f const &position, string co
 }
 
 Entity::Entity(pugi::xml_node node) 
-	: label{ node.name() }
-	, position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
+	: position{ sf::Vector2f (node.attribute("x").as_float(),node.attribute("y").as_float())}
 {
 	string spriteLabel = node.attribute("sprite").as_string();
 	texture.loadFromFile("resources/sprites/" + spriteLabel + ".png");

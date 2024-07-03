@@ -4,8 +4,8 @@
 
 using namespace std;
 
-MovingEntity::MovingEntity(std::string const& label, sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction)
-	: Entity(label, position, spriteLabel)
+MovingEntity::MovingEntity(sf::Vector2f const& position, std::string const& spriteLabel, float const& speed, sf::Vector2f const& direction)
+	: Entity(position, spriteLabel)
 	, speed { speed }
 	, direction{ direction }
 {}
@@ -15,37 +15,9 @@ MovingEntity::MovingEntity(pugi::xml_node node)
 	, speed{ node.attribute("speed").as_float() }
 {}
 
-void MovingEntity::move(std::vector<std::unique_ptr<Entity>> const& entities)
+void MovingEntity::move()
 {
-	//TODO : doublon avec le player
-	lastPosition = position;
-
-	direction = sf::Vector2f(0, 0);
-	if (isMovingUp)
-		direction += sf::Vector2f(0, -1);
-	if (isMovingDown)
-		direction += sf::Vector2f(0, 1);
-	if (isMovingLeft)
-		direction += sf::Vector2f(-1, 0);
-	if (isMovingRight)
-		direction += sf::Vector2f(1, 0);
-
-	position += direction * speed;
-	sprite.setPosition(position);
-
-	isColliding = false;
-	for (auto const& entity : entities)
-	{
-		if (collide(*entity)) {
-			isColliding = true;
-			this->handleCollision(entity.get());
-		}
-	}
-
-	if (isColliding) {
-		position = lastPosition;
-		sprite.setPosition(lastPosition);
-	}
+	//TODO : a voir comment on fait, est ce qu'on vire ca et on met pas tout dans movvingStrategy
 }
 
 std::string MovingEntity::dump(std::string const& indent) const {
@@ -57,7 +29,7 @@ std::string MovingEntity::dump(std::string const& indent) const {
 
 void MovingEntity::update(std::vector<std::unique_ptr<Entity>> const& entities)
 {
-	move(entities);
+	move();
 }
 
 void MovingEntity::handleCollision(Entity* const entity) const {

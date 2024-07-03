@@ -17,9 +17,13 @@ public:
 	Game() = default;
 	void	run();
 
-	//Deux fonctions de callbacks
-	void onPlayerCollision(Entity* entity); //appelé par le joueur lorsqu'il rentre en collision avec un objet
-	void kill(int); //appelé par le joueur lorsqu'un projectile rentre en collision avec un monstre, pour tuer proprement le monstre
+	void	triggerLoose();
+
+	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
+
+	void	changeRoom(const std::string &destination); //Gère la collision entre le joueur et une porte
+	Player* getPlayer() const { return player.get(); }
+
 
 private:
 	void	processEvents();
@@ -28,9 +32,6 @@ private:
 	void	update();
 	void	save() const; //TODO : A implémenter, sauvegarde du xml actuel dans un fichier.
 
-	void	handleCollisionPlayerDoor(const Door* door); //Gère la collision entre le joueur et une porte
-	void	setCallbacks(); //Initialise les callbacks 
-	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
 	void	initialiseSprites();
 
 	sf::RenderWindow		mWindow{ sf::VideoMode::getFullscreenModes()[0], "SFML Application", sf::Style::Close};

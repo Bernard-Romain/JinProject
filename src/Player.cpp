@@ -1,23 +1,20 @@
 #include "Player.h"
+#include "Projectile.h"
 #include <sstream>
 #include <iostream>
 #include "Game.h"
 
 using namespace std;
 
-Player::Player(pugi::xml_node node)
+Player::Player(pugi::xml_node node, Game* game)
     : LivingEntity(node)
+    , game(game)
 {
     sprite.setScale(sf::Vector2f(0.6f, 0.6f));
 
     for (int i = 0; i < 10; i ++ ) {
-        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1));
+        inactiveProjectiles.push_back(make_unique<Projectile>(position, (string)"Tear", 25, sf::Vector2f(0, 0), 1, this));
     }
-}
-
-void Player::updatePositionWhenChangingRoom() {
-    lastPosition = sf::Vector2f(1000, 500);
-    sprite.setPosition(lastPosition);
 }
 
 std::string Player::dump(std::string const& indent) const {
@@ -73,41 +70,55 @@ void Player::render(sf::RenderWindow* mWindow) const {
     }
 }
 
+void Player::desactiveProjectile(Projectile* projectile) {
+    toRemoveProjectiles.push_back(projectile);
+}
+
+void Player::removeProjectile() {
+    for (auto projectile : toRemoveProjectiles) {
+        auto it = std::find_if(activeProjectiles.begin(), activeProjectiles.end(),
+            [projectile](const std::unique_ptr<Projectile>& p) {
+                return p.get() == projectile;
+            });
+
+        if (it != activeProjectiles.end()) {
+            inactiveProjectiles.push_back(std::move(*it));
+            activeProjectiles.erase(it);
+        }
+        else {
+            std::cerr << "Projectile not found in activeProjectiles." << std::endl;
+        }
+    }
+    toRemoveProjectiles.clear();
+}
+
+//TODO : faut faire quelque chose de ca, le décaler dans un header commun avec game, et surtout renommer le truc
+void collidee(Entity& first, Entity& second) { 
+    first.collide_with(second);
+}
+
 void Player::update(std::vector<std::unique_ptr<Entity>> const &entities)
 {
-    move(entities);
-
+    move();
+    
     //Pour chaque projectile actif, on le fait bouger et on regarde ses collisions
-    for (auto it = activeProjectiles.begin(); it != activeProjectiles.end();) {
-        (*it)->update(entities);
-        (*it)->isColliding = false;
-        for (int i = 0; i < entities.size(); i++)
+    for (auto& projectile : activeProjectiles) {
+        projectile->update(entities);
+        for (auto const& entity : entities)
         {
-            if ((*it)->collide(*entities[i])) {
-                (*it)->isColliding = true;
-                if (entities[i].get()->getLabel() == "Monster"sv) (callbackInstance->*killCallback)(i);
+            if (projectile->collide(*entity)) {
+                collidee(*projectile, *entity);
+                break;
             }
         }
-        if ((*it)->isColliding) {
-            inactiveProjectiles.push_back(std::move(*it));
-            it = activeProjectiles.erase(it);
-        }
-        else
-            ++it;
     }
-
+    removeProjectile();
 }
 
-void Player::handleCollision(Entity* const entity) {
-    if ((entity->getLabel() == "Monster"sv) || (entity->getLabel() == "Door"sv)) {
-        updatePositionWhenChangingRoom();
-        (callbackInstance->*collisionCallback)(entity);
-    }
-}
-
-void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
+void Player::move()
 {
     lastPosition = position;
+
     direction = sf::Vector2f();
     if (isMovingUp)
         direction += sf::Vector2f(0, -1);
@@ -120,18 +131,18 @@ void Player::move(std::vector<std::unique_ptr<Entity>> const& entities)
 
     position += direction * speed;
     sprite.setPosition(position);
+}
 
-    isColliding = false;
-    for (auto const& entity : entities) //Fait le tour des entités pour checker les collisions
-    {
-        if (collide(*entity)) {
-            isColliding = true;
-            this->handleCollision(entity.get());
-        }
-    }
+void Player::collide_with(Wall& other) {
+    position = lastPosition;
+    sprite.setPosition(lastPosition);
+}
 
-    if (isColliding) {
-        position = lastPosition;
-        sprite.setPosition(lastPosition);
-    }
+void Player::collide_with(Door& other) {
+    position = sf::Vector2f(1000, 500);
+    sprite.setPosition(position);
+}
+
+void Player::collide_with(Monster& other) {
+    game->triggerLoose();
 }

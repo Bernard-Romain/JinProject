@@ -1,13 +1,13 @@
 #pragma once
 #include "LivingEntity.h"
-#include "Projectile.h"
+#include <iostream>
 
 class Game;
 
 class Player : public LivingEntity {
 
 public:
-	explicit(false) Player(pugi::xml_node node);
+	explicit(false) Player(pugi::xml_node node, Game* game);
 
 	std::string dump(std::string const& indent) const override;
 	void manageInput(sf::Keyboard::Key input, bool active); //Appelé lorsque l'on appuie sur une touche du clavier
@@ -16,17 +16,24 @@ public:
 	void render(sf::RenderWindow* mWindow) const override;
 	void update(std::vector<std::unique_ptr<Entity>> const &entities) override;
 
-	using CollisionCallback = void (Game::*)(Entity*);
-	using KillCallback = void (Game::*)(int);
+	void move() override;
+	void desactiveProjectile(Projectile* projectile);
 
-	void setCollisionCallback(Game* instance, CollisionCallback callback) { callbackInstance = instance;  collisionCallback = callback; }
-	void setKillCallback(Game* instance, KillCallback callback) { callbackInstance = instance; killCallback = callback; }
+	//V2 Collisions
+	void collide_with(Entity& other) override {
+		other.collide_with(*this);
+	};
 
-	void updatePositionWhenChangingRoom(); 
+	void collide_with(Wall& other) override;
+	void collide_with(Door& other) override;
+	void collide_with(Player& other) override {};
+	void collide_with(Monster& other) override;
+	void collide_with(Projectile& other) override {};
 
-	void move(std::vector<std::unique_ptr<Entity>> const& entities) override;
+	sf::Vector2f getPosition() const { return position; };
 
 private:
+
 	/*Les projectiles sont gérés par une pool d'instances:
 	* 10 projectiles sont instanciés lors de la création du personnage et sont mis dans inactiveProjectiles.
 	* A chaque tir, un projectile inactif est déplacé dans activeProjectile (et fait son rôle de projectile)
@@ -35,10 +42,8 @@ private:
 	std::vector<std::unique_ptr<Projectile>> activeProjectiles;
 	std::vector<std::unique_ptr<Projectile>> inactiveProjectiles;
 
-	void handleCollision(Entity* const entity);
+	std::vector<Projectile*> toRemoveProjectiles;
+	void removeProjectile();
 
-	//Deux callbacks qui appelent des fonctions de Game, lors de la collision du player et lors de la collision entre un projectile et un monstre
-	CollisionCallback collisionCallback = nullptr;
-	KillCallback killCallback = nullptr;
-	Game* callbackInstance = nullptr;
+	Game* game;
 };

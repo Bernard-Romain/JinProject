@@ -143,5 +143,5 @@ void Player::collide_with(Door& other) {
 }
 
 void Player::collide_with(Monster& other) {
-    game->triggerLoose();
+    game->triggerLoss();
 }

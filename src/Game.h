@@ -17,7 +17,7 @@ public:
 	Game() = default;
 	void	run();
 
-	void	triggerLoose();
+	void	triggerLoss();
 
 	void	checkIfWin(); //Boucle pour vérifier si toutes les rooms ont le Room_State Cleared, ce qui amène à la victoire
 
@@ -44,13 +44,13 @@ private:
 	sf::Sprite winSprite;
 	sf::Texture winTexture;
 
-	bool loose = false;
-	sf::Sprite looseSprite;
-	sf::Texture looseTexture;
+	bool lose = false;
+	sf::Sprite loseSprite;
+	sf::Texture loseTexture;
 
 	sf::SoundBuffer winSoundBuffer;
 	sf::Sound winSound;
 
-	sf::SoundBuffer looseSoundBuffer;
-	sf::Sound looseSound;
+	sf::SoundBuffer loseSoundBuffer;
+	sf::Sound loseSound;
 };

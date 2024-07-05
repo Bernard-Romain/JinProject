@@ -38,8 +38,8 @@ void Game::load()
 	initialiseSprites();
 }
 
-void Game::triggerLoose() {
-	loose = true;
+void Game::triggerLoss() {
+	lose = true;
 	looseSound.play();
 }
 
@@ -60,7 +60,7 @@ void Game::render()
 	currentRoom->get()->render(&mWindow);
 	player->render(&mWindow);
 	if (win) mWindow.draw(winSprite);
-	if (loose) mWindow.draw(looseSprite);
+	if (lose) mWindow.draw(looseSprite);
 	mWindow.display();
 }
 
@@ -70,7 +70,7 @@ void collide(Entity& first, Entity& second) {
 
 void Game::update()
 {
-	if (!(win || loose)) //TODO :le changer de place, peut etre ne plus rentrer dans cette boucle quand c'est gagné
+	if (!(win || lose)) //TODO :le changer de place, peut etre ne plus rentrer dans cette boucle quand c'est gagné
 	{
 		player->update(currentRoom->get()->entities);
 

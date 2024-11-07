@@ -1,6 +1,11 @@
 # Contexte
 Ce jeu a été réalisé par Romain BERNARD et Pablo BROCHARD dans le cadre du cours de Développement C++ proposé par Télécom SudParis et encadré par Michel SIMATIC et Loïc JOLLY. L'objectif était de rassembler dans un projet les apprentissages du cours.
 
+# Lancer le jeu
+Pour lancer simplement, exécuter le fichier 
+./build/mainLauncher/Release/mainLauncher.exe
+(Cette méthode n'est pas très propre je le reconnais)
+
 # Présentation du jeu
 Le jeu s'inspire du titre The Binding of Isaac. Il reprend globalement le système de déplacement, de combat et d'exploration. Le but du jeu est de parcourir toutes les salles et d'éliminer tout les ennemis. Lorsque tout les ennemis d'une salle sont éliminés, l'accès aux autres salles est débloqué.
 

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\a775c2f8a9b4184192df6e14da834bdf\pugixml-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\b438b6b63f26fd15dd088fbd28b3dcd2\pugixml-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\d64ae5fa34d4d34bac77774cacfac99c\pugixml-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\pugixml-subbuild\CMakeFiles\pugixml-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{2BBE6AE0-344C-30E8-841F-E8E3BA0C3A54}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

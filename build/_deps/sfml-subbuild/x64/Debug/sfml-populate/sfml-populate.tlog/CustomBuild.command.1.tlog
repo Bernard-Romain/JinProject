@@ -1,0 +1,152 @@
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-MKDIR.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -Dcfgdir=/Debug -P C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/tmp/sfml-populate-mkdirs.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-mkdir
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-DOWNLOAD.RULE
+setlocal
+cd C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/download-sfml-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/verify-sfml-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -P C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/extract-sfml-populate.cmake
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-download
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-UPDATE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-update
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-PATCH.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-patch
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-CONFIGURE.RULE
+setlocal
+cd C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-configure
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-BUILD.RULE
+setlocal
+cd C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-build
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-INSTALL.RULE
+setlocal
+cd C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-install
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\0739615AD7AEA9543073D3CE858C571B\SFML-POPULATE-TEST.RULE
+setlocal
+cd C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-build
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E echo_append
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-test
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\DAEFB2C2C08A1EF2882352B74CFA4529\SFML-POPULATE-COMPLETE.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E make_directory C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/Debug
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/Debug/sfml-populate-complete
+if %errorlevel% neq 0 goto :cmEnd
+"C:\Program Files\CMake\bin\cmake.exe" -E touch C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/sfml-populate-prefix/src/sfml-populate-stamp/Debug/sfml-populate-done
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKEFILES\5A2643ED2BB287D015C99E4CCDAE2CF1\SFML-POPULATE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\_DEPS\SFML-SUBBUILD\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild -BC:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild --check-stamp-file C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

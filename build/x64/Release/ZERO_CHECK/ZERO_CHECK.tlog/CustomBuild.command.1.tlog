@@ -1,0 +1,10 @@
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\CMAKEFILES\83DFB420F83521A8924FEC825BA3857F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/romai/Bureau/Cours/JIN/CAASI -BC:/Users/romai/Bureau/Cours/JIN/CAASI/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/romai/Bureau/Cours/JIN/CAASI/build/CAASI.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

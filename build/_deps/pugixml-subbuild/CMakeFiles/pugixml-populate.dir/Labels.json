@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/pugixml-populate"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/d64ae5fa34d4d34bac77774cacfac99c/pugixml-populate.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/b438b6b63f26fd15dd088fbd28b3dcd2/pugixml-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/pugixml-subbuild/CMakeFiles/a775c2f8a9b4184192df6e14da834bdf/pugixml-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"pugixml-populate"
+		],
+		"name" : "pugixml-populate"
+	}
+}

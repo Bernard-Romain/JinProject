@@ -1,0 +1,46 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/sfml-populate"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/5a2643ed2bb287d015c99e4ccdae2cf1/sfml-populate.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/daefb2c2c08a1ef2882352b74cfa4529/sfml-populate-complete.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-build.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-configure.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-download.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-install.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-mkdir.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-patch.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-test.rule"
+		},
+		{
+			"file" : "C:/Users/romai/Bureau/Cours/JIN/CAASI/build/_deps/sfml-subbuild/CMakeFiles/0739615ad7aea9543073d3ce858c571b/sfml-populate-update.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"sfml-populate"
+		],
+		"name" : "sfml-populate"
+	}
+}

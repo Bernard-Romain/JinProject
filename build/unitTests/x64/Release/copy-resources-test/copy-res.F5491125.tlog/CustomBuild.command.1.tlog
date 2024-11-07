@@ -1,0 +1,20 @@
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\BUILD\CMAKEFILES\00515C4F82B082B3C066C087034E0372\COPY-RESOURCES-TEST.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -E copy_directory_if_different C:/Users/romai/Bureau/Cours/JIN/CAASI/resources C:/Users/romai/Bureau/Cours/JIN/CAASI/out/build/x64-Debug/unitTests/resources
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^C:\USERS\ROMAI\BUREAU\COURS\JIN\CAASI\UNITTESTS\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/romai/Bureau/Cours/JIN/CAASI -BC:/Users/romai/Bureau/Cours/JIN/CAASI/build --check-stamp-file C:/Users/romai/Bureau/Cours/JIN/CAASI/build/unitTests/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-mkdir.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-download.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-update.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-patch.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-configure.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-build.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-install.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\0739615ad7aea9543073d3ce858c571b\sfml-populate-test.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\daefb2c2c08a1ef2882352b74cfa4529\sfml-populate-complete.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\5a2643ed2bb287d015c99e4ccdae2cf1\sfml-populate.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\romai\Bureau\Cours\JIN\CAASI\build\_deps\sfml-subbuild\CMakeFiles\sfml-populate" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{8BE560AF-6371-3854-8754-2C5F52AA67FF}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

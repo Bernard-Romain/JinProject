@@ -40,7 +40,7 @@ void Game::load()
 
 void Game::triggerLoss() {
 	lose = true;
-	looseSound.play();
+	loseSound.play();
 }
 
 void Game::checkIfWin() {
@@ -60,7 +60,7 @@ void Game::render()
 	currentRoom->get()->render(&mWindow);
 	player->render(&mWindow);
 	if (win) mWindow.draw(winSprite);
-	if (lose) mWindow.draw(looseSprite);
+	if (lose) mWindow.draw(loseSprite);
 	mWindow.display();
 }
 
@@ -160,13 +160,13 @@ void Game::initialiseSprites() {
 	winSprite.setScale(sf::Vector2f(3, 3));
 	winSprite.setTexture(winTexture);
 	winSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - winSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - winSprite.getGlobalBounds().height) / 2));
-	looseTexture.loadFromFile("resources/sprites/Loose.png");
-	looseSprite.setScale(sf::Vector2f(3, 3));
-	looseSprite.setTexture(looseTexture);
-	looseSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - looseSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - looseSprite.getGlobalBounds().height) / 2));
+	loseTexture.loadFromFile("resources/sprites/Loose.png");
+	loseSprite.setScale(sf::Vector2f(3, 3));
+	loseSprite.setTexture(loseTexture);
+	loseSprite.setPosition(sf::Vector2f(((float)mWindow.getSize().x - loseSprite.getGlobalBounds().width) / 2, ((float)mWindow.getSize().y - loseSprite.getGlobalBounds().height) / 2));
 
 	winSoundBuffer.loadFromFile("resources/audios/win.mp3");
 	winSound.setBuffer(winSoundBuffer);
-	looseSoundBuffer.loadFromFile("resources/audios/loose.mp3");
-	looseSound.setBuffer(looseSoundBuffer);
+	loseSoundBuffer.loadFromFile("resources/audios/loose.mp3");
+	loseSound.setBuffer(loseSoundBuffer);
 }

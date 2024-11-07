@@ -40,7 +40,6 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(pugixml)
 
 add_subdirectory(mainLauncher)
-add_subdirectory(srcOriginal)
 add_subdirectory(src)
 
 
@@ -60,4 +59,3 @@ FetchContent_MakeAvailable(googletest)
 # Otherwise, Visual Studio test explorer does not see unit tests (See ticket https://developercommunity.visualstudio.com/t/No-tests-discovered-for-googletest-and-C/1148799#T-ND1150621)
 include(GoogleTest)
 enable_testing()
-add_subdirectory(unitTests)
